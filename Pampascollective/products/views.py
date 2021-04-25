@@ -1,4 +1,8 @@
-from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
+from django.shortcuts import (render,
+                              HttpResponse,
+                              redirect,
+                              reverse,
+                              get_object_or_404)
 from .models import Product
 from .forms import ProductForm
 
@@ -31,3 +35,12 @@ def create_product(request):
         })
 
 
+def update_product(request, product_id):
+    product_being_updated = get_object_or_404(Product, pk=product_id)
+
+    update_product_form = ProductForm(instance=product_being_updated)
+
+    return render(request, 'products/update-product.template.html', {
+        "product_being_updated":product_being_updated,
+        "form": update_product_form
+    })
