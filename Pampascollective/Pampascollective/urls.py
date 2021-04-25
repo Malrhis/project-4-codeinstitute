@@ -21,5 +21,6 @@ import reviews.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('products/', products.views.show_products),
+    path('products/create', products.views.create_product),
     path('reviews/', reviews.views.show_reviews)
 ]
