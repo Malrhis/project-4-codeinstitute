@@ -10,3 +10,4 @@ vscode:
     - eventyret.bootstrap-4-cdn-snippet
     - kevinglasson.cornflakes-linter
     - hookyqr.beautify
+    - alexcvzz.vscode-sqlite@0.12.0:1159ee1f58892d78a121071408429b7a
