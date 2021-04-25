@@ -11,3 +11,4 @@ vscode:
     - kevinglasson.cornflakes-linter
     - hookyqr.beautify
     - alexcvzz.vscode-sqlite@0.12.0:1159ee1f58892d78a121071408429b7a
+    - esbenp.prettier-vscode@6.3.2:13e527ae62035854197198eedd2bc84f
