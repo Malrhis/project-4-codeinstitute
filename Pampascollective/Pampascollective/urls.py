@@ -20,8 +20,12 @@ import reviews.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('products/', products.views.show_products),
+    path('products/', products.views.show_products,
+         name='show_product_route'),
     path('products/create', products.views.create_product),
-    path('products/update/<product_id>', products.views.update_product),
+    path('products/update/<product_id>',
+         products.views.update_product, name='update_product_route'),
+    path('products/delete/<product_id>',
+         products.views.delete_product, name='delete_product_route'),
     path('reviews/', reviews.views.show_reviews)
 ]

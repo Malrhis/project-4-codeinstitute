@@ -63,3 +63,14 @@ def update_product(request, product_id):
             "product_being_updated": product_being_updated,
             "form": update_product_form
         })
+
+
+def delete_product(request, product_id):
+    product_to_delete = get_object_or_404(Product, pk=product_id)
+    if request.method == 'POST':
+        product_to_delete.delete()
+        return redirect(show_products)
+    else:
+        return render(request, 'products/delete-product.template.html', {
+            "product": product_to_delete
+        })

@@ -7,7 +7,7 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = (
             'name',
-            'price_in_cents',
+            'price',
             'colour',
             'length',
             'desc'
