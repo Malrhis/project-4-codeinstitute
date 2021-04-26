@@ -36,11 +36,30 @@ def create_product(request):
 
 
 def update_product(request, product_id):
+    # Get product to be updated from db
     product_being_updated = get_object_or_404(Product, pk=product_id)
 
-    update_product_form = ProductForm(instance=product_being_updated)
+    # check if the update form is submitted
+    if request.method == "POST":
+        # get values from the POST method
+        product_update_form = ProductForm(
+            request.POST, instance=product_being_updated)
 
-    return render(request, 'products/update-product.template.html', {
-        "product_being_updated":product_being_updated,
-        "form": update_product_form
-    })
+        # check if the value of the form is valid
+        if product_update_form.is_valid():
+            # if yes, save and redirect to product listings
+            product_update_form.save()
+            return redirect(reverse(show_products))
+        else:
+            # re-render the form with values from POST, but don't save anything.
+            return render(request, 'products/update-product.template.html', {
+                "form": product_update_form
+            })
+
+    else:
+        # if not POST, then just render the form with product_id instance
+        update_product_form = ProductForm(instance=product_being_updated)
+        return render(request, 'products/update-product.template.html', {
+            "product_being_updated": product_being_updated,
+            "form": update_product_form
+        })
