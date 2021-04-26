@@ -17,6 +17,7 @@ class Colour(models.Model):
         return self.name
 
 
+# Main Product Model
 class Product(models.Model):
     name = models.CharField(blank=False, max_length=255)
     product_type = models.ForeignKey(ProductType, on_delete=models.CASCADE)
