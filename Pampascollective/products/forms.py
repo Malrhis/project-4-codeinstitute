@@ -1,5 +1,5 @@
 from django import forms
-from .models import Product
+from .models import Product, ProductType, Colour, Tag
 
 
 class ProductForm(forms.ModelForm):
@@ -7,8 +7,11 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = (
             'name',
+            'product_type',
             'price',
             'colour',
+            'tag',
             'length',
-            'desc'
+            'desc',
+            'quantity'
         )
