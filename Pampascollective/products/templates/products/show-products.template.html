@@ -20,10 +20,13 @@ Product Listing
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
+                <th scope="col">Type</th>
                 <th scope="col">Price</th>
+                <th scope="col">Colour</th>
                 <th scope="col">Colour</th>
                 <th scope="col">Length</th>
                 <th scope="col">Description</th>
+                <th scope="col">Tags</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
@@ -33,10 +36,13 @@ Product Listing
             <tr>
                 <th scope="row">{{product.id}}</th>
                 <td>{{product.name}}</td>
-                <td>{{product.price_in_cents}}</td>
+                <td>{{product.product_type}}</td>
+                <td>$ {{product.price}}</td>
                 <td>{{product.colour}}</td>
-                <td>{{product.length}}</td>
+                <td>{{product.length}} cm</td>
                 <td>{{product.desc}}</td>
+                <td>{{product.quantity}}</td>
+                <td>{{product.tag}}</td>
                 <td><a href="{% url 'update_product_route' product_id=product.id %}">Update</a></td>
                 <td><a href="{% url 'delete_product_route' product_id=product.id %}">Delete</a></td>
             </tr>

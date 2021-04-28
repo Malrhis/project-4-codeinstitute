@@ -1,21 +1,17 @@
+{% extends 'base.template.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Update Product: {{product_being_updated.name}}</title>
-</head>
+{% block title %}
+Update Product: {{product_being_updated.name}}
+{% endblock %}
 
-<body>
-    <h1>Updating Product: {{product_being_updated.name}}</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p}}
-        <input type="Submit" value="Update" />
-    </form>
-</body>
+{% block content %}
+<h1>Updating Product: {{product_being_updated.name}}</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <input type="Submit" value="Update" />
+</form>
+{% endblock %}
 
 </html>
