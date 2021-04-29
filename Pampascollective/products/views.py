@@ -3,6 +3,7 @@ from django.shortcuts import (render,
                               redirect,
                               reverse,
                               get_object_or_404)
+from django.contrib import messages
 from .models import Product
 from .forms import ProductForm
 
@@ -22,6 +23,8 @@ def create_product(request):
 
         if create_product_form.is_valid():
             create_product_form.save()
+            messages.success(
+                request, f"New product {create_product_form.cleaned_data['name']} has been created")
             return redirect(reverse(show_products))
         else:
             return render(request, 'products/create-products.template.html', {
