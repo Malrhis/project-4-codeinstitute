@@ -43,7 +43,7 @@ Product Listing
                 <td>{{product.length}} cm</td>
                 <td>{{product.desc}}</td>
                 <td>{{product.quantity}}</td>
-                <td>{{product.tag}}</td>
+                <td>{% for tag in product.tag.all %}{{tag}}{% endfor %}</td>
                 <td><a href="{% url 'update_product_route' product_id=product.id %}">Update</a></td>
                 <td><a href="{% url 'delete_product_route' product_id=product.id %}">Delete</a></td>
             </tr>
