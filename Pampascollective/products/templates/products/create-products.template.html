@@ -10,7 +10,7 @@ Create Product Form
     <h1>Create New Product</h1>
     <form method="POST">
     {% csrf_token %}
-    {{ form.as_p}}
+    {{ form|crispy }}
     <input type="Submit" value="Create Product"/>
     </form>
 {% endblock %}
