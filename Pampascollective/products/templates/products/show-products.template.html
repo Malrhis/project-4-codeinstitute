@@ -9,15 +9,23 @@ Product Listing
 {% block content %} 
     <h1>Product Listing</h1>
     {% if request.user.is_authenticated  %}
-    
+
     <p>Welcome {{request.user}}</p>
     {% else %}
     <p>Please <a href="/accounts/login">Login</a></p>
     {%endif%}
 
+    <form method="GET">
+    {{search_form|crispy}}
+    <input type="submit" class="btn btn-primary" value="Search Products">
+    </form>
+
     <p>
         List of Mel's Pampas Grass products
     </p>
+
+    
+
     <table class="table">
         <thead>
             <tr>

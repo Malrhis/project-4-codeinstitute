@@ -5,16 +5,30 @@ from django.shortcuts import (render,
                               reverse,
                               get_object_or_404)
 from django.contrib import messages
+from django.db.models import Q
 from .models import Product
-from .forms import ProductForm
+from .forms import ProductForm, SearchForm
 
 # Create your views here.
 
 
 def show_products(request):
+    search_form = SearchForm(request.GET)
     products = Product.objects.all()
+
+    query = ~Q(pk__in=[])
+
+    if 'name' in request.GET and request.GET['name']:
+        query = query & Q(name__icontains=request.GET['name'])
+
+    if 'product_type' in request.GET and request.GET['product_type']:
+        query = query & Q(product_type__exact=request.GET['product_type'])
+
+    products = products.filter(query)
+
     return render(request, 'products/show-products.template.html', {
-        'products': products
+        'products': products,
+        'search_form': search_form
     })
 
 
