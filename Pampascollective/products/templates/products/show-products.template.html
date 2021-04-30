@@ -9,10 +9,12 @@ Product Listing
 {% block content %} 
     <h1>Product Listing</h1>
     {% if request.user.is_authenticated  %}
+    
     <p>Welcome {{request.user}}</p>
     {% else %}
     <p>Please <a href="/accounts/login">Login</a></p>
     {%endif%}
+
     <p>
         List of Mel's Pampas Grass products
     </p>

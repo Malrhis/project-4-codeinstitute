@@ -3,15 +3,15 @@
 {% load static %}
 
 {% block title %}   
-Create New Product
+Create New Review
 {% endblock %} 
 
 {% block content %} 
-    <h1>Create New Product</h1>
+    <h1>Create New Review</h1>
     <form method="POST">
     {% csrf_token %}
     {{ form|crispy }}
-    <input type="Submit" value="Create Product"/>
+    <input type="Submit" value="Create Review"/>
     </form>
 {% endblock %}
 </html>

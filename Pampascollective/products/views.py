@@ -1,3 +1,4 @@
+# products views.py
 from django.shortcuts import (render,
                               HttpResponse,
                               redirect,
