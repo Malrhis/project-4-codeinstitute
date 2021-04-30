@@ -27,7 +27,7 @@ def show_products(request):
         query = query & Q(product_type__exact=request.GET['product_type'])
 
     # Only assign distinct values
-    products = products.filter(query).values().distinct()
+    products = products.filter(query).distinct()
 
     return render(request, 'products/show-products.template.html', {
         'products': products,
