@@ -10,5 +10,4 @@ class ReviewForm(forms.ModelForm):
             'title',
             'content',
             'date',
-            'product',
         )

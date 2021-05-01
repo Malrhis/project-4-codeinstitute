@@ -7,6 +7,7 @@ from django.shortcuts import (render,
 from django.contrib import messages
 from django.db.models import Q
 from .models import Product
+from reviews.models import Review
 from .forms import ProductForm, SearchForm
 
 # Create your views here.
@@ -80,7 +81,7 @@ def update_product(request, product_id):
             product_update_form.save()
             return redirect(reverse(show_products))
         else:
-            # re-render the form with values from POST, but don't save anything.
+            # re-render the form with values from POST, but don't save yet
             return render(request, 'products/update-product.template.html', {
                 "form": product_update_form
             })

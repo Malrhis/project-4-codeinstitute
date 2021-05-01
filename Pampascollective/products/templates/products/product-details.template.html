@@ -25,6 +25,9 @@
 </ul>
 
 <h3>Reviews for {{ product.name }}</h3>
+<div class="row">
+    <a href="{% url 'create_review_route' product_id=product.id %}" class="btn btn-primary">Add a Review</a>
+</div>
 {% for review in product.review_set.all %}
 <div class="card">
     <h4 class="card-title">{{review.title}}</h3>
