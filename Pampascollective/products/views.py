@@ -35,6 +35,14 @@ def show_products(request):
     })
 
 
+# view product details
+def view_product_details(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    return render(request, 'products/product-details.template.html', {
+        'product': product
+    })
+
+
 def create_product(request):
     if request.method == 'POST':
         create_product_form = ProductForm(request.POST)
