@@ -33,3 +33,12 @@ def add_to_cart(request, product_id):
 
     messages.success(request, (str(product.name)+" has been added to cart"))   
     return redirect(reverse('show_product_route'))
+
+
+def view_cart(request):
+
+    cart = request.session.get('shopping_cart',{})
+
+    return render(request, 'cart/view_cart-template.html',{
+        'cart':cart
+    })
