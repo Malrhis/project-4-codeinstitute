@@ -1,6 +1,5 @@
 # products views.py
 from django.shortcuts import (render,
-                              HttpResponse,
                               redirect,
                               reverse,
                               get_object_or_404)
@@ -51,7 +50,8 @@ def create_product(request):
         if create_product_form.is_valid():
             create_product_form.save()
             messages.success(
-                request, f"New product {create_product_form.cleaned_data['name']} has been created")
+                request,
+                f"New product {create_product_form.cleaned_data['name']} has been created")
             return redirect(reverse(show_products))
         else:
             return render(request, 'products/create-products.template.html', {
