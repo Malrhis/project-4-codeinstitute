@@ -19,14 +19,19 @@ def add_to_cart(request, product_id):
     # criteria is product_id
     product = get_object_or_404(Product, pk=product_id)
 
+    if product_id in cart:
+        cart[product_id]['qty'] += 1
+
+
     # create cart dictionary with product_id as the key
-    cart[product_id] = {
-        # another dictionary
-        'id': product_id,
-        'name': product.name,
-        'price': str(product.price),
-        'qty': 1
-    }
+    else:
+        cart[product_id] = {
+            # another dictionary
+            'id': product_id,
+            'name': product.name,
+            'price': str(product.price),
+            'qty': 1
+        }
 
     # save the shopping cart
     request.session['shopping_cart'] = cart
