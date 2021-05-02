@@ -62,7 +62,8 @@ INSTALLED_APPS = [
 
     # pampascollective apps
     'products',
-    'reviews'
+    'reviews',
+    'cart'
 ]
 
 MIDDLEWARE = [
