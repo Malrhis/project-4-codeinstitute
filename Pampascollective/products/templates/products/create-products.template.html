@@ -2,6 +2,11 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
+{% block css %}
+<!-- for uploadcare css -->
+{{form.media}}
+{% endblock %}
+
 {% block title %}   
 Create New Product
 {% endblock %} 
