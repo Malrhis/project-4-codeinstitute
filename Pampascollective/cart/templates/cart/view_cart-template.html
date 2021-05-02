@@ -12,6 +12,9 @@
         <p>
             Quantity: {{item.qty}}
         </p>
+        <p>
+            <a href="{% url 'remove_from_cart' product_id=item.id %}" class="btn btn-danger">Remove</a>
+        </p>
     </li>
     {% endfor %}
 </ul>
