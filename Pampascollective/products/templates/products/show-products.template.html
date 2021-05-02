@@ -15,6 +15,8 @@ Product Listing
 <p>Please <a href="/accounts/login">Login</a></p>
 {%endif%}
 
+<a href="{% url 'view_cart' %}" class="btn btn-primary">Cart</a>
+
 <form method="GET">
     {{search_form|crispy}}
     <input type="submit" class="btn btn-primary" value="Search Products">
@@ -38,6 +40,7 @@ Product Listing
             <th scope="col">Tags</th>
             <th scope="col"></th>
             <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -54,6 +57,7 @@ Product Listing
             <td>{% for tag in product.tag.all %}{{tag}}{% endfor %}</td>
             <td><a href="{% url 'update_product_route' product_id=product.id %}">Update</a></td>
             <td><a href="{% url 'delete_product_route' product_id=product.id %}">Delete</a></td>
+             <td><a href="{% url 'add_to_cart' product_id=product.id %}">Add to Cart</a></td>
         </tr>
         {% endfor %}
     </tbody>
