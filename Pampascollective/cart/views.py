@@ -37,7 +37,7 @@ def add_to_cart(request, product_id):
             # another dictionary
             'id': product_id,
             'name': product.name,
-            'price': str(product.price),
+            'price': float(product.price),
             'qty': 1
         }
 
@@ -63,3 +63,19 @@ def remove_from_cart(request, product_id):
                                    " has been removed from cart"))
 
     return redirect(reverse('show_product_route'))
+
+
+def update_item_quantity(request, product_id):
+
+    # get cart from session
+    cart = request.session.get('shopping_cart', {})
+    product = get_object_or_404(Product, pk=product_id)
+
+    if product_id in cart:
+        # replace the qty under the product id key with the name="qty" from requst.POST
+        cart[product_id]['qty'] = request.POST['qty']
+        request.session['shopping_cart'] = cart
+        messages.success(request, (str(product.name) +
+                                   " quantity has been updated"))
+
+    return redirect(reverse('view_cart'))

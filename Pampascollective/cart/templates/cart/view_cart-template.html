@@ -10,7 +10,12 @@
             Product Price: {{item.price}}
         </p>
         <p>
-            Quantity: {{item.qty}}
+            <form method="POST" action="{% url 'update_item_quantity' product_id=item.id %}">
+                {% csrf_token %}
+                Quantity: <input type="text" name="qty" value="{{item.qty}}" />
+                <input type="submit" class="btn btn-success" value="Update Quantity" />
+            </form>
+
         </p>
         <p>
             <a href="{% url 'remove_from_cart' product_id=item.id %}" class="btn btn-danger">Remove</a>
