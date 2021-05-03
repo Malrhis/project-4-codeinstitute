@@ -61,7 +61,8 @@ INSTALLED_APPS = [
     # pampascollective apps
     'products',
     'reviews',
-    'cart'
+    'cart',
+    'checkout'
 ]
 
 MIDDLEWARE = [
@@ -176,3 +177,9 @@ STATICFILES_DIRS = [
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
+STRIPE_SUCCESS_URL = os.environ.get('STRIPE_SUCCESS_URL')
+STRIPE_CANCEL_URL = os.environ.get('STRIPE_CANCEL_URL')
