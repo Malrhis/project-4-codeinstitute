@@ -110,7 +110,8 @@ def payment_completed(request):
         session = event['data']['object']
 
         # call handle_payment function to handle the payment complete
-        handle_payment(session)
+        # handle_payment(session)
+        print(session)
     return HttpResponse(status=200)
 
 
