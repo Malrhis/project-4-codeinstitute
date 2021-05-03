@@ -15,8 +15,6 @@ from django.contrib.sites.models import Site
 
 from django.views.decorators.csrf import csrf_exempt
 
-endpoint_secret = "whsec_oKxw6qrw1SmMDUo7rvnRSIMr82eqDNs0"
-
 
 # Create your views here.
 def checkout(request):
@@ -51,12 +49,6 @@ def checkout(request):
             'qty': product['qty']
         })
 
-    # get the current website
-    current_site = Site.objects.get_current()
-
-    # get the domain name
-    domain = current_site.domain
-
     session = stripe.checkout.Session.create(
         payment_method_types=['card'],
         line_items=line_items,
@@ -81,11 +73,19 @@ def checkout_success(request):
     return HttpResponse("Checkout success")
 
 
+# exempt from CSRF so that stripe can call our endpoint
 @csrf_exempt
 def payment_completed(request):
+    # verify that request is from stripe
     payload = request.body
+
+    # extract signature
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+
+    # prepare variable to store data that stripe is sending
     event = None
+
+    endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
 
     try:
         event = stripe.Webhook.construct_event(
@@ -95,16 +95,18 @@ def payment_completed(request):
         # Invalid payload
         return HttpResponse(status=400)
     except stripe.error.SignatureVerificationError as e:
-        # Invalid signature
+        # Invalid signature - data is not from stripe
         return HttpResponse(status=400)
 
-    # Handle the checkout.session.completed event
+    # once we have verified from Stripe, we extract data
+    # check if the event type is checkout.session.completed
     if event['type'] == 'checkout.session.completed':
+
+        # if yes, then event represents that payment session is completed
         session = event['data']['object']
-
-        # Fulfill the purchase...
-        handle_payment(session)
-
+        print(session)
+        # call handle_payment function to handle the payment complete
+        # handle_payment(session)
     return HttpResponse(status=200)
 
 
@@ -113,8 +115,6 @@ def handle_payment(session):
 
     # change the metadata from string back to array
     all_product_ids = session["metadata"]["all_product_ids"].split(",")
-
-
     # go through each book id
     for product_id in all_product_ids:
         product_model = get_object_or_404(Product, pk=product_id)
