@@ -30,6 +30,8 @@ def add_to_cart(request, product_id):
 
     if product_id in cart:
         cart[product_id]['qty'] += 1
+        cart[product_id]['total_price'] = float(
+            cart[product_id]['price']) * int(cart[product_id]['qty'])
 
     # create cart dictionary with product_id as the key
     else:
@@ -38,6 +40,7 @@ def add_to_cart(request, product_id):
             'id': product_id,
             'name': product.name,
             'price': float(product.price),
+            'total_price': float(product.price),
             'qty': 1
         }
 
@@ -72,8 +75,10 @@ def update_item_quantity(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
 
     if product_id in cart:
-        # replace the qty under the product id key with the name="qty" from requst.POST
-        cart[product_id]['qty'] = request.POST['qty']
+        # replace the qty under the product id key with the name="qty" from request.POST
+        cart[product_id]['qty'] = int(request.POST['qty'])
+        cart[product_id]['total_price'] = float(
+            cart[product_id]['price']) * int(request.POST['qty'])
         request.session['shopping_cart'] = cart
         messages.success(request, (str(product.name) +
                                    " quantity has been updated"))

@@ -15,8 +15,6 @@ Product Listing
 <p>Please <a href="/accounts/login">Login</a></p>
 {%endif%}
 
-<a href="{% url 'view_cart' %}" class="btn btn-primary">Cart</a>
-
 <form method="GET">
     {{search_form|crispy}}
     <input type="submit" class="btn btn-primary" value="Search Products">
