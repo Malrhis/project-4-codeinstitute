@@ -14,7 +14,11 @@
         const stripe = Stripe('{{public_key}}');
         stripe.redirectToCheckout({
             sessionId: "{{session_id}}"
-        })
+        }).then(function (result) {
+      // If `redirectToCheckout` fails; display error message
+      // using `result.error.message`.
+    });
+
     </script>
     {% endautoescape %}
 </body>
