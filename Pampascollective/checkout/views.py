@@ -104,9 +104,9 @@ def payment_completed(request):
 
         # if yes, then event represents that payment session is completed
         session = event['data']['object']
-        print(session)
+
         # call handle_payment function to handle the payment complete
-        # handle_payment(session)
+        handle_payment(session)
     return HttpResponse(status=200)
 
 
