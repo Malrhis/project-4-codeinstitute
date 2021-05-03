@@ -73,6 +73,10 @@ def checkout_success(request):
     return HttpResponse("Checkout success")
 
 
+def checkout_cancelled(request):
+    return HttpResponse("Checkout cancelled")
+
+
 # exempt from CSRF so that stripe can call our endpoint
 @csrf_exempt
 def payment_completed(request):
