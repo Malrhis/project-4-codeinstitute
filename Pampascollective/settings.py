@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-taq#qrh_pggz4uo@&#u&k-z-x&k2d113$1+q)v$ve8ejd_jva1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*", "pampas-collective.herokuapp.com"]
 
 
 # Application definition
@@ -174,6 +174,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
