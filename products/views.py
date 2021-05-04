@@ -12,6 +12,10 @@ from .forms import ProductForm, SearchForm
 # Create your views here.
 
 
+def landing_page(request):
+    return render(request, 'products/landing_page-template.html')
+
+
 def show_products(request):
     search_form = SearchForm(request.GET)
     products = Product.objects.all()
