@@ -8,6 +8,7 @@ import stripe
 import json
 
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from products.models import Product
 from checkout.models import Purchase
 
@@ -17,6 +18,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
+@login_required
 def checkout(request):
     # tell Stripe what my api key is
     stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -66,13 +68,13 @@ def checkout(request):
         'public_key': settings.STRIPE_PUBLISHABLE_KEY
     })
 
-
+@login_required
 def checkout_success(request):
     # Empty the shopping cart
     request.session['shopping_cart'] = {}
     return HttpResponse("Checkout success")
 
-
+@login_required
 def checkout_cancelled(request):
     return HttpResponse("Checkout cancelled")
 
