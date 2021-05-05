@@ -65,8 +65,8 @@ def checkout(request):
             "all_product_ids": json.dumps(all_product_ids)
         },
         mode="payment",
-        success_url=domain + reverse("checkout_success"),
-        cancel_url=domain + reverse("checkout_cancelled")
+        success_url=settings.STRIPE_SUCCESS_URL,
+        cancel_url=settings.STRIPE_CANCEL_URL
     )
 
     return render(request, 'checkout/checkout-template.html', {
@@ -74,11 +74,13 @@ def checkout(request):
         'public_key': settings.STRIPE_PUBLISHABLE_KEY
     })
 
+
 @login_required
 def checkout_success(request):
     # Empty the shopping cart
     request.session['shopping_cart'] = {}
     return HttpResponse("Checkout success")
+
 
 @login_required
 def checkout_cancelled(request):
@@ -118,8 +120,11 @@ def payment_completed(request):
         session = event['data']['object']
 
         # call handle_payment function to handle the payment complete
-        handle_payment(session)
-        # print(session)
+        print(session)
+        # handle_payment(session)
+        request.session['shopping_cart'] = {}
+        print(request.session['shopping_cart'])
+
     return HttpResponse(status=200)
 
 

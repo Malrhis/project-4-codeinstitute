@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
- {% block css %}
+{% block css %}
 <link rel="stylesheet" href="{% static 'style.css' %}">
 {% endblock %}
 
@@ -11,14 +11,14 @@ Product Listing
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <form class="form-inline" method="GET">
-            <div class="form-group my-3">
-                {{search_form|crispy}}
-                <input type="submit" class="btn btn-dark" value="Search Products">
-            </div>
-        </form>
-    </div>
+<div class="container">
+    <form class="form-inline d-flex justify-content-center" method="GET">
+        <div class="form-group my-3">
+            {{search_form|crispy}}
+            <input type="submit" class="btn btn-dark" value="Search Products">
+        </div>
+    </form>
+</div>
 <div class="container">
 
     <section class="jumbotron text-center">
@@ -28,43 +28,27 @@ Product Listing
         </div>
     </section>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Type</th>
-                <th scope="col">Price</th>
-                <th scope="col">Colour</th>
-                <th scope="col">Colour</th>
-                <th scope="col">Length</th>
-                <th scope="col">Description</th>
-                <th scope="col">Tags</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for product in products %}
-            <tr>
-                <th scope="row">{{product.id}}</th>
-                <td><a href="{% url 'view_product_details_route' product_id=product.id %}">{{product.name}}</a></td>
-                <td>{{product.product_type}}</td>
-                <td>$ {{product.price}}</td>
-                <td>{{product.colour}}</td>
-                <td>{{product.length}} cm</td>
-                <td>{{product.desc}}</td>
-                <td>{{product.quantity}}</td>
-                <td>{% for tag in product.tag.all %}{{tag}}{% endfor %}</td>
-                <td><a href="{% url 'update_product_route' product_id=product.id %}">Update</a></td>
-                <td><a href="{% url 'delete_product_route' product_id=product.id %}">Delete</a></td>
-                <td><a href="{% url 'add_to_cart' product_id=product.id %}">Add to Cart</a></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% endblock %}
+    <section class="row">
+        {% for product in products %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+                <img class="card-img-top img-fluid" src="{{product.image}}" />
+                <div class="card-body">
+                    <h5 class="card-title"><a
+                            href="{% url 'view_product_details_route' product_id=product.id %}">{{product.name}}</a>
+                    </h5>
+                    <p class="card-text mb-0">{{product.product_type}}</p>
+                    <p class="card-text mb-0">{{product.price}}</p>
+                    <p class="card-text mb-0">{{product.colour}}</p>
+                    <p class="card-text mb-0">{{product.length}}</p>
+                    {% for tag in product.tag.all %}
+                    <p class="card-text mb-0">{{tag}}</p>
+                    {% endfor %}
+                    <p class="card-text">{{product.quantity}}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </section>
 </div>
-
-</html>
+{% endblock %}
