@@ -51,6 +51,12 @@ def checkout(request):
             'qty': product['qty']
         })
 
+    # get the current website
+    current_site = Site.objects.get_current()
+
+    # get the domain name
+    domain = current_site.domain
+
     session = stripe.checkout.Session.create(
         payment_method_types=['card'],
         line_items=line_items,
@@ -59,8 +65,8 @@ def checkout(request):
             "all_product_ids": json.dumps(all_product_ids)
         },
         mode="payment",
-        success_url=settings.STRIPE_SUCCESS_URL,
-        cancel_url=settings.STRIPE_CANCEL_URL
+        success_url=domain + reverse("checkout_success"),
+        cancel_url=domain + reverse("checkout_cancelled")
     )
 
     return render(request, 'checkout/checkout-template.html', {
@@ -112,8 +118,8 @@ def payment_completed(request):
         session = event['data']['object']
 
         # call handle_payment function to handle the payment complete
-        # handle_payment(session)
-        print(session)
+        handle_payment(session)
+        # print(session)
     return HttpResponse(status=200)
 
 

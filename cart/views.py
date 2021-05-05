@@ -75,7 +75,8 @@ def update_item_quantity(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
 
     if product_id in cart:
-        # replace the qty under the product id key with the name="qty" from request.POST
+        # replace the qty under the product id key with the name="qty"
+        # from request.POST
         cart[product_id]['qty'] = int(request.POST['qty'])
         cart[product_id]['total_price'] = float(
             cart[product_id]['price']) * int(request.POST['qty'])
