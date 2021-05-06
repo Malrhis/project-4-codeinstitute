@@ -1,32 +1,44 @@
 {% extends "base.template.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="container">
-    <h1>Shopping Cart</h1>
-    <a href="{% url 'checkout' %}" class="btn btn-success mb-3">Checkout</a>
-    <ul class="list-group">
-        {% for key, item in cart.items %}
-        <li class="list-group-item">
-            Product Name: {{item.name}}
-            <p>
-                Product Price: {{item.price}}
-            </p>
-            <p>
-                <form method="POST" action="{% url 'update_item_quantity' product_id=item.id %}">
-                    {% csrf_token %}
-                    Quantity: <input type="text" name="qty" value="{{item.qty}}" />
-                    <input type="submit" class="btn btn-success" value="Update Quantity" />
-                </form>
+    <section class="cart-banner jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Shopping Cart</h1>
+            <p class="lead">Items you added into your cart</p>
+            <a href="{% url 'checkout' %}" class="btn btn-success mb-3">Checkout</a>
+            <ul class="list-group">
+        </div>
+    </section>
 
-            </p>
-            <p>
-                Subtotal: $ {{item.total_price}}
-            </p>
-            <p>
-                <a href="{% url 'remove_from_cart' product_id=item.id %}" class="btn btn-danger">Remove</a>
-            </p>
-        </li>
-        {% endfor %}
+    {% for key, item in cart.items %}
+    <li class="list-group-item">
+        Product Name: {{item.name}}
+        <p>
+            Product Price: {{item.price}}
+        </p>
+        <p>
+            <form method="POST" action="{% url 'update_item_quantity' product_id=item.id %}">
+                {% csrf_token %}
+                Quantity: <input type="text" name="qty" value="{{item.qty}}" />
+                <input type="submit" class="btn btn-success" value="Update Quantity" />
+            </form>
+
+        </p>
+        <p>
+            Subtotal: $ {{item.total_price}}
+        </p>
+        <p>
+            <a href="{% url 'remove_from_cart' product_id=item.id %}" class="btn btn-danger">Remove</a>
+        </p>
+    </li>
+    {% endfor %}
     </ul>
 </div>
 

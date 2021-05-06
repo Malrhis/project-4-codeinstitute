@@ -21,7 +21,7 @@ Product Listing
 </div>
 <div class="container">
 
-    <section class="products-banner jumbotron text-center">
+    <section class="products-banner border border-dark shadow jumbotron text-center">
         <div class="container">
             <h1 class="jumbotron-heading">Our Products</h1>
             <p class="lead">Specially curated for your home decor needs</p>
@@ -45,6 +45,7 @@ Product Listing
                     <p class="card-text mb-0">{{tag}}</p>
                     {% endfor %}
                     <p class="card-text">{{product.quantity}}</p>
+                    <a href="{% url 'add_to_cart' product_id=product.id %}" class="btn btn-dark btn-sm">Add to Cart</a>
                 </div>
             </div>
         </div>
