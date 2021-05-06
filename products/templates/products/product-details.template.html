@@ -12,44 +12,49 @@
 
 {% block content %}
 <div class="container">
-    <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h1 class="display-4">{{product.name}}</h1>
-      <p class="lead">Create a new product for sale</p>
+    <div class="px-3 py-2 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">{{product.name}}</h1>
     </div>
-
-
-<h1>{{product.name}}</h1>
-<img src="{{product.image.cdn_url}}"/>
-<ul>
-    <li>Product Type: {{product.product_type}}</li>
-    <li>Price: $ {{product.price}}</li>
-    <li>Colour: {{product.colour}}</li>
-    <li>Tags:</li>
-    <ul>
-        {% for t in product.tag.all %}
-        <li>
-            <span class="badge badge-dark">{{t.name}}</span>
-        </li>
-        {% endfor %}
-    </ul>
-    <li>Length: {{product.length}} cm</li>
-    <li>Description: {{product.desc}}</li>
-</ul>
-
-<h3>Reviews for {{ product.name }}</h3>
-<div class="row">
-    <a href="{% url 'create_review_route' product_id=product.id %}" class="btn btn-primary">Add a Review</a>
-</div>
-{% for review in product.review_set.all %}
-<div class="card">
-    <h4 class="card-title">{{review.title}}</h3>
-        <div class="card-body">
-            <p>Review submitted on {{review.date}}</p>
-            <p>{{review.content}}</p>
-            <h4>Submitted by {{review.owner}}</h4>
+    <div class="row">
+        <div class="col-md-6 shadow">
+            <div>
+                <img class="card-img-top img-fluid" src="{{product.image.cdn_url}}" />
+            </div>
         </div>
+        <div class="col-md-6 shadow">
+            <div class="container py-5">
+                <p class="mb-0 lead">{{product.name}}</p>
+                <p class="mb-0 lead">{{product.product_type}}</p>
+                <p class="mb-0">Price: $ {{product.price}}</p>
+                <p class="mb-0">
+                    {% for t in product.tag.all %}
+                    <span class="badge badge-dark">{{t.name}}</span>
+                    {% endfor %}
+                </p>
+                <p class="small mb-0">Colour: {{product.colour}}</p>
+                <p class="small mb-0">Length: {{product.length}} cm</p>
+                <p class="mb-0">{{product.desc}}</p>
+            </div>
+        </div>
+    </div>
+    <hr class="my-3">
+    <div class="row px-3 py-0 pb-md-4 ">
+        <div class="col d-flex justify-content-between">
+            <h4 class="d-inline-block my-auto">Reviews for {{ product.name }}</h4>
+            <a href="{% url 'create_review_route' product_id=product.id %}" class="btn btn-sm btn-dark">Add a Review</a>
+        </div>
+    </div>
+    {% for review in product.review_set.all %}
+    <div class="card">
+        <div class="card-header small py-1">
+            Review submitted on {{review.date}}
+        </div>
+        <div class="card-body py-1">
+            <p class="card-title mb-1">{{review.title}}</hp>
+                <p class="small card-text mb-1">{{review.content}}</p>
+                <p class="small card-text text-muted">Submitted by {{review.owner}}</p>
+        </div>
+    </div>
+    {% endfor %}
 </div>
-
-{% endfor %}
-
 {% endblock %}
