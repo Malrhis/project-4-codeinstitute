@@ -1,7 +1,7 @@
 {% extends 'base.template.html' %}
 {% load static %}
 
- {% block css %}
+{% block css %}
 <link rel="stylesheet" href="{% static 'style.css' %}">
 {% endblock %}
 
@@ -15,6 +15,30 @@ Pampas Collective
         <h1 class="display-4 font-weight-normal text-dark">Browse Collections</h1>
         <p class="lead font-weight-normal text-dark">Add class & nature to your home</p>
         <a class="btn btn-dark btn-outline-secondary text-light" href="/products">Shop Now</a>
+    </div>
+</section>
+<section class="product-types container">
+    <div class="row">
+        <div class="col-lg-4 my-3">
+            <img class="rounded-circle" src="" alt="placeholder image" width="140" height="140">
+            <h2 class="mt-3">Artificial Pampas</h2>
+            <p>The pampas look, without the hassle</p>
+        </div>
+        <div class="col-lg-4 my-3">
+            <img class="rounded-circle" src="" alt="placeholder image" width="140" height="140">
+            <h2 class="mt-3">Our Values</h2>
+            <p>
+                Test text
+            </p>
+        </div>
+        <!-- column 3 -->
+        <div class="col-lg-4 my-3">
+            <img class="rounded-circle" src="" alt="placeholder image" width="140" height="140">
+            <h2 class="mt-3">Test text</h2>
+            <p>
+                Test Text
+            </p>
+        </div>
     </div>
 </section>
 {% endblock %}
