@@ -39,6 +39,7 @@ def add_to_cart(request, product_id):
             # another dictionary
             'id': product_id,
             'name': product.name,
+            'image': product.image.cdn_url,
             'price': float(product.price),
             'total_price': float(product.price),
             'qty': 1
