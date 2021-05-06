@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="container py-5 shadow border border-dark">
+            <div class="container py-4 shadow border border-dark">
                 <p class="mb-0 lead">{{product.name}}</p>
                 <p class="mb-0 lead">{{product.product_type}}</p>
                 <p class="mb-0">Price: $ {{product.price}}</p>
@@ -34,6 +34,8 @@
                 <p class="small mb-0">Colour: {{product.colour}}</p>
                 <p class="small mb-0">Length: {{product.length}} cm</p>
                 <p class="mb-0">{{product.desc}}</p>
+                <hr class="my-1">
+                <a href="{% url 'add_to_cart' product_id=product.id %}" class="btn btn-success mt-2">Add to Cart</a>
             </div>
         </div>
     </div>

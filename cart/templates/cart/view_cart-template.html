@@ -8,7 +8,7 @@
 
 {% block content %}
 <div class="container">
-    <section class="cart-banner jumbotron text-center">
+    <section class="cart-banner jumbotron text-center border border-dark">
         <div class="container">
             <h1 class="jumbotron-heading">Shopping Cart</h1>
             <p class="lead">Items you added into your cart</p>
@@ -19,24 +19,37 @@
 
     {% for key, item in cart.items %}
     <li class="list-group-item">
-        Product Name: {{item.name}}
-        <p>
-            Product Price: {{item.price}}
-        </p>
-        <p>
-            <form method="POST" action="{% url 'update_item_quantity' product_id=item.id %}">
-                {% csrf_token %}
-                Quantity: <input type="text" name="qty" value="{{item.qty}}" />
-                <input type="submit" class="btn btn-success" value="Update Quantity" />
-            </form>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div>
+                        <img class="card-img img-fluid border border-dark" src="{{item.image}}" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div>
+                        Product Name: {{item.name}}
+                        <p>
+                            Product Price: {{item.price}}
+                        </p>
+                        <p>
+                            <form method="POST" action="{% url 'update_item_quantity' product_id=item.id %}">
+                                {% csrf_token %}
+                                Quantity: <input type="text" name="qty" value="{{item.qty}}" />
+                                <input type="submit" class="btn btn-success" value="Update Quantity" />
+                            </form>
 
-        </p>
-        <p>
-            Subtotal: $ {{item.total_price}}
-        </p>
-        <p>
-            <a href="{% url 'remove_from_cart' product_id=item.id %}" class="btn btn-danger">Remove</a>
-        </p>
+                        </p>
+                        <p>
+                            Subtotal: $ {{item.total_price}}
+                        </p>
+                        <p>
+                            <a href="{% url 'remove_from_cart' product_id=item.id %}" class="btn btn-danger">Remove</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </li>
     {% endfor %}
     </ul>
