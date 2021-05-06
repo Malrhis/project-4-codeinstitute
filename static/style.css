@@ -1,47 +1,51 @@
-body {
+/* body {
     background-color: #EDD7AF;
+} */
+.navbar {
+    background-color: #EDD7AF;
+    height:70px
 }
 
 footer {
-    background-color:#F8F9FA;
+    background-color: #F8F9FA;
 }
 
 .push-navbar-down {
-    height: 56px;
+    height: 70px;
 }
 
- .featurette-one{
-    background-image: url("https://magazinec.com/wp-content/uploads/2019/07/Hero-9.jpg"); 
-    background-position: center; 
-    background-repeat: no-repeat; 
-    background-size: cover; 
-}
-
-.featurette-two{
-    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("https://magazinec.com/wp-content/uploads/2019/07/Hero-9.jpg"); 
+.featurette-one {
+    background-image: url("https://magazinec.com/wp-content/uploads/2019/07/Hero-9.jpg");
     background-position: center;
-    background-repeat: no-repeat; 
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.featurette-two {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://magazinec.com/wp-content/uploads/2019/07/Hero-9.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
 }
 
 .form-inline .form-group {
-    margin-right:4px;
+    margin-right: 4px;
 }
 
-label{
-   margin-right:4px; 
+label {
+    margin-right: 4px;
 }
 
-.products-banner{
-    background-image: url("https://magazinec.com/wp-content/uploads/2019/07/Hero-9.jpg"); 
-    background-position: center; 
-    background-repeat: no-repeat; 
-    background-size: cover; 
+.products-banner {
+    background-image: url("https://magazinec.com/wp-content/uploads/2019/07/Hero-9.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-.cart-banner{
-    background-image: url("https://thumbs.dreamstime.com/b/stylish-scandinavian-modern-white-cozy-eco-interior-minimalist-style-modern-home-decor-pampas-grass-vase-open-space-212757972.jpg"); 
-    background-position: center; 
-    background-repeat: no-repeat; 
-    background-size: cover; 
+.cart-banner {
+    background-image: url("https://thumbs.dreamstime.com/b/stylish-scandinavian-modern-white-cozy-eco-interior-minimalist-style-modern-home-decor-pampas-grass-vase-open-space-212757972.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
