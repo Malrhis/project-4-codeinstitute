@@ -9,6 +9,7 @@ from .models import Review
 from .forms import ReviewForm
 from products.models import Product
 from django.contrib.auth.decorators import login_required
+from products.views import show_products
 # Create your views here.
 
 
