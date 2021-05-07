@@ -10,8 +10,8 @@ class Purchase(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     purchase_date = models.DateTimeField(auto_now_add=True)
     qty = models.IntegerField(default=0)
-    total = models.IntegerField(default=0)
-    price = models.IntegerField(default=0)
+    total = models.DecimalField(default=0,max_digits=19,decimal_places=2)
+    price = models.DecimalField(default=0,max_digits=19,decimal_places=2)
 
     def __str__(self):
         return f"Purchase made for product#{self.product_id} by user#{self.user_id} on {self.purchase_date}"
