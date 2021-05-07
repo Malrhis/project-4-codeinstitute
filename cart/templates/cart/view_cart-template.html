@@ -16,43 +16,47 @@
             <ul class="list-group">
         </div>
     </section>
-
-    {% for key, item in cart.items %}
-    <li class="list-group-item">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div>
-                        <img class="card-img img-fluid border border-dark" src="{{item.image}}" />
+    <section class="my-3">
+        {% for key, item in cart.items %}
+        <li class="list-group-item">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div>
+                            <img class="card-img img-fluid border border-dark" src="{{item.image}}" />
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div>
-                        Product Name: {{item.name}}
-                        <p>
-                            Product Price: {{item.price}}
-                        </p>
-                        <p>
-                            <form method="POST" action="{% url 'update_item_quantity' product_id=item.id %}">
-                                {% csrf_token %}
-                                Quantity: <input type="text" name="qty" value="{{item.qty}}" />
-                                <input type="submit" class="btn btn-success" value="Update Quantity" />
-                            </form>
-
-                        </p>
-                        <p>
-                            Subtotal: $ {{item.total_price}}
-                        </p>
-                        <p>
-                            <a href="{% url 'remove_from_cart' product_id=item.id %}" class="btn btn-danger">Remove</a>
-                        </p>
+                    <div class="col-md-6 py-4">
+                        <div>
+                            <p class="text-uppercase"><strong>
+                                    {{item.name}}</strong>
+                            </p>
+                            <p>
+                                Unit Price: <span class="lead">S$ {{item.price}}0</span>
+                            </p>
+                            <p class="mb-0">
+                                <form class="form-inline form-group" method="POST"
+                                    action="{% url 'update_item_quantity' product_id=item.id %}">
+                                    {% csrf_token %}
+                                    Quantity: <input class="cart-quantity-input mx-1" type="text" name="qty"
+                                        value="{{item.qty}}" />
+                                    <input type="submit" class="btn btn-success btn-sm mx-1" value="Update Quantity" />
+                                </form>
+                            </p>
+                            <p>
+                                Subtotal: <span class="lead">S$ {{item.total_price}}0</span>
+                            </p>
+                            <p class="mb-0 mt-5">
+                                <a href="{% url 'remove_from_cart' product_id=item.id %}"
+                                    class="btn btn-danger btn-sm">Remove from Cart</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </li>
-    {% endfor %}
-    </ul>
+        </li>
+        {% endfor %}
+    </section>
 </div>
 
 {% endblock %}

@@ -49,3 +49,7 @@ label {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.cart-quantity-input{
+    width: 40px;
+}
