@@ -121,7 +121,7 @@ def payment_completed(request):
 
         # call handle_payment function to handle the payment complete
         print(session)
-        handle_payment(session)
+        # handle_payment(session)
 
     return HttpResponse(status=200)
 
