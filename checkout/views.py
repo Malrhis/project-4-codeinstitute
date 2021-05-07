@@ -69,7 +69,7 @@ def checkout(request):
         cancel_url=settings.STRIPE_CANCEL_URL
     )
 
-    request.session['shopping_cart'] = {}
+    # request.session['shopping_cart'] = {}
 
     return render(request, 'checkout/checkout-template.html', {
         'session_id': session.id,
@@ -120,8 +120,12 @@ def payment_completed(request):
         session = event['data']['object']
 
         # call handle_payment function to handle the payment complete
+        all_product_ids_str = session["metadata"]["all_product_ids"]
+        all_product_ids = json.loads(all_product_ids_str)
+        print(all_product_ids)
+
         print(session)
-        # handle_payment(session)
+        handle_payment(session)
 
     return HttpResponse(status=200)
 
@@ -130,16 +134,22 @@ def handle_payment(session):
     user = get_object_or_404(User, pk=session["client_reference_id"])
 
     # change the metadata from string back to array
-    # all_product_ids_str = session["metadata"]["all_product_ids"]
-    # all_product_ids = json.loads(all_product_ids_str)
-    all_product_ids = session["metadata"]["all_product_ids"].split(",")
+    all_product_ids_str = session["metadata"]["all_product_ids"]
+    all_product_ids = json.loads(all_product_ids_str)
 
     # go through each book id
-    for product_id in all_product_ids:
+    count = -1
+    for x in all_product_ids:
+        count += 1
+        product_id = all_product_ids[count]['product_id']
+        qty = all_product_ids[count]['qty']
+
         product_model = get_object_or_404(Product, pk=product_id)
 
         # create the purchase model
         purchase = Purchase()
         purchase.product_id = product_model
         purchase.user_id = user
+        purchase.price = product_model.price
+        purchase.qty = qty
         purchase.save()
