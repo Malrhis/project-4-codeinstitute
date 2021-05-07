@@ -78,7 +78,7 @@ def checkout(request):
 def checkout_success(request):
     # Empty the shopping cart
     request.session['shopping_cart'] = {}
-    return HttpResponse("Checkout success")
+    return render(request, 'checkout/checkout_success-template.html')
 
 
 def checkout_cancelled(request):
