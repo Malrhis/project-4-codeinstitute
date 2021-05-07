@@ -65,9 +65,11 @@ def checkout(request):
             "all_product_ids": json.dumps(all_product_ids)
         },
         mode="payment",
-        success_url=domain + reverse("checkout_success"),
-        cancel_url=domain + reverse("checkout_cancelled")
+        success_url=settings.STRIPE_SUCCESS_URL,
+        cancel_url=settings.STRIPE_CANCEL_URL
     )
+
+    request.session['shopping_cart'] = {}
 
     return render(request, 'checkout/checkout-template.html', {
         'session_id': session.id,
