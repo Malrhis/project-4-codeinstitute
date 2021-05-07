@@ -65,8 +65,8 @@ def checkout(request):
             "all_product_ids": json.dumps(all_product_ids)
         },
         mode="payment",
-        success_url=settings.STRIPE_SUCCESS_URL,
-        cancel_url=settings.STRIPE_CANCEL_URL
+        success_url=domain + reverse("checkout_success"),
+        cancel_url=domain + reverse("checkout_cancelled")
     )
 
     return render(request, 'checkout/checkout-template.html', {
@@ -87,7 +87,7 @@ def checkout_cancelled(request):
 
 # exempt from CSRF so that stripe can call our endpoint
 @csrf_exempt
-def payment_complete(request):
+def payment_completed(request):
     # verify that request is from stripe
     payload = request.body
 
