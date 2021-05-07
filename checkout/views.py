@@ -75,21 +75,19 @@ def checkout(request):
     })
 
 
-@login_required
 def checkout_success(request):
     # Empty the shopping cart
     request.session['shopping_cart'] = {}
     return HttpResponse("Checkout success")
 
 
-@login_required
 def checkout_cancelled(request):
     return HttpResponse("Checkout cancelled")
 
 
 # exempt from CSRF so that stripe can call our endpoint
 @csrf_exempt
-def payment_completed(request):
+def payment_complete(request):
     # verify that request is from stripe
     payload = request.body
 
@@ -120,9 +118,9 @@ def payment_completed(request):
         session = event['data']['object']
 
         # call handle_payment function to handle the payment complete
-        print(session)
-        # handle_payment(session)
-        request.session['shopping_cart'] = {}
+        # print(session)
+        handle_payment(session)
+        # request.session['shopping_cart'] = {}
         print(request.session['shopping_cart'])
 
     return HttpResponse(status=200)
