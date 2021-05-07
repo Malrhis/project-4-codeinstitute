@@ -130,8 +130,10 @@ def handle_payment(session):
     user = get_object_or_404(User, pk=session["client_reference_id"])
 
     # change the metadata from string back to array
-    all_product_ids_str = session["metadata"]["all_product_ids"]
-    all_product_ids = json.loads(all_product_ids_str)
+    # all_product_ids_str = session["metadata"]["all_product_ids"]
+    # all_product_ids = json.loads(all_product_ids_str)
+    all_product_ids = session["metadata"]["all_product_ids"].split(",")
+
     # go through each book id
     for product_id in all_product_ids:
         product_model = get_object_or_404(Product, pk=product_id)
