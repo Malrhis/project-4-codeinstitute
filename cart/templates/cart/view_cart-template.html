@@ -8,14 +8,27 @@
 
 {% block content %}
 <div class="container">
-    <section class="cart-banner jumbotron text-center border border-dark">
+    <section class="cart-banner jumbotron text-center border">
         <div class="container">
             <h1 class="jumbotron-heading">Shopping Cart</h1>
             <p class="lead">Items you added into your cart</p>
-            <a href="{% url 'checkout' %}" class="btn btn-success mb-3">Checkout</a>
             <ul class="list-group">
         </div>
     </section>
+    <hr class="mb-3">
+    <section>
+        <div class="container">
+            <div class="row-fluid">
+                <p class="mb-1 lead text-right"><strong>Grand Total: S$ {{cart_total}}0</strong></p>
+            </div>
+            <div class="row-fluid text-right">
+                <p class="d-inline-block"><a href="{% url 'show_product_route' %}" class="btn btn-light border border-dark mb-3">Continue
+                        Shopping</a></p>
+                <p class="d-inline-block"><a href="{% url 'checkout' %}" class="btn btn-dark mb-3">Checkout</a></p>
+            </div>
+        </div>
+    </section>
+    <hr class="my-1">
     <section class="my-3">
         {% for key, item in cart.items %}
         <li class="list-group-item">
@@ -40,7 +53,7 @@
                                     {% csrf_token %}
                                     Quantity: <input class="cart-quantity-input mx-1" type="text" name="qty"
                                         value="{{item.qty}}" />
-                                    <input type="submit" class="btn btn-success btn-sm mx-1" value="Update Quantity" />
+                                    <input type="submit" class="btn btn-dark btn-sm mx-1" value="Update Quantity" />
                                 </form>
                             </p>
                             <p>

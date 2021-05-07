@@ -13,8 +13,14 @@ def view_cart(request):
 
     cart = request.session.get('shopping_cart', {})
 
+    cart_total = 0
+
+    for product_id in cart:
+        cart_total = cart[product_id]['total_price'] + cart_total
+
     return render(request, 'cart/view_cart-template.html', {
-        'cart': cart
+        'cart': cart,
+        'cart_total': cart_total
     })
 
 

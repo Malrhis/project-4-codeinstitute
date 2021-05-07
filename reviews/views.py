@@ -8,17 +8,22 @@ from django.contrib import messages
 from .models import Review
 from .forms import ReviewForm
 from products.models import Product
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
 def show_reviews(request):
+    # validation of username
+    if not request.user.username == ('admin'):
+        return redirect(reverse(show_products))
+    
     reviews = Review.objects.all()
     return render(request, 'reviews/show-reviews.template.html', {
         'reviews': reviews
     })
 
 
+@login_required
 def create_reviews(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     if request.method == 'POST':
