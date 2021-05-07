@@ -69,7 +69,8 @@ def checkout(request):
         cancel_url=settings.STRIPE_CANCEL_URL
     )
 
-    # request.session['shopping_cart'] = {}
+    # empty the shopping cart
+    request.session['shopping_cart'] = {}
 
     return render(request, 'checkout/checkout-template.html', {
         'session_id': session.id,
@@ -124,7 +125,6 @@ def payment_completed(request):
         all_product_ids = json.loads(all_product_ids_str)
         print(all_product_ids)
 
-        print(session)
         handle_payment(session)
 
     return HttpResponse(status=200)
