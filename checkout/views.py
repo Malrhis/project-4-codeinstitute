@@ -1,5 +1,6 @@
 from django.shortcuts import (render,
                               reverse,
+                              redirect,
                               HttpResponse,
                               get_object_or_404)
 # import settings so that we can access the public stripe key
@@ -15,6 +16,7 @@ from checkout.models import Purchase
 from django.contrib.sites.models import Site
 
 from django.views.decorators.csrf import csrf_exempt
+from products.views import show_products
 
 
 # Create your views here.
@@ -85,7 +87,7 @@ def checkout_success(request):
 
 
 def checkout_cancelled(request):
-    return HttpResponse("Checkout cancelled")
+    return render(request, 'checkout/checkout_cancelled-template.html')
 
 
 # exempt from CSRF so that stripe can call our endpoint
@@ -153,3 +155,15 @@ def handle_payment(session):
         purchase.price = product_model.price
         purchase.qty = qty
         purchase.save()
+
+
+
+def show_purchases(request):
+    # validation of username
+    if not request.user.username == ('admin'):
+        return redirect(reverse(show_products))
+    
+    purchases = Purchase.objects.all()
+    return render(request, 'checkout/show_purchases-template.html', {
+        'purchases': purchases
+    })
