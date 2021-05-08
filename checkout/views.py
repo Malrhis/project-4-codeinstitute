@@ -17,67 +17,66 @@ from django.contrib.sites.models import Site
 
 from django.views.decorators.csrf import csrf_exempt
 from products.views import show_products
+from cart.views import view_cart
 
 
 # Create your views here.
 @login_required
 def checkout(request):
-    # tell Stripe what my api key is
-    stripe.api_key = settings.STRIPE_SECRET_KEY
-
-    # get shopping cart
     cart = request.session.get('shopping_cart', {})
+    if (len(cart) == 0):
+        return(redirect(reverse(view_cart)))
+    else:
+        # tell Stripe what my api key is
+        stripe.api_key = settings.STRIPE_SECRET_KEY
 
-    # create line items for checkout
-    line_items = []
+        # get shopping cart
+        cart = request.session.get('shopping_cart', {})
 
-    # for storing the quantity of reach product
-    all_product_ids = []
+        # create line items for checkout
+        line_items = []
 
-    for product_id, product in cart.items():
-        # retrieve the book by its id from the database
-        product_model = get_object_or_404(Product, pk=product_id)
+        # for storing the quantity of reach product
+        all_product_ids = []
 
-        # create line item
-        line_item = {
-            "name": product_model.name,
-            "amount": int(product_model.price * 100),
-            "quantity": product['qty'],
-            "currency": "SGD"
-        }
+        for product_id, product in cart.items():
+            # retrieve the book by its id from the database
+            product_model = get_object_or_404(Product, pk=product_id)
 
-        line_items.append(line_item)
+            # create line item
+            line_item = {
+                "name": product_model.name,
+                "amount": int(product_model.price * 100),
+                "quantity": product['qty'],
+                "currency": "SGD"
+            }
 
-        all_product_ids.append({
-            'product_id': product_id,
-            'qty': product['qty']
+            line_items.append(line_item)
+
+            all_product_ids.append({
+                'product_id': product_id,
+                'qty': product['qty']
+            })
+
+        session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=line_items,
+            client_reference_id=request.user.id,
+            metadata={
+                "all_product_ids": json.dumps(all_product_ids)
+            },
+            mode="payment",
+            success_url=settings.STRIPE_SUCCESS_URL,
+            cancel_url=settings.STRIPE_CANCEL_URL
+        )
+
+        # empty the shopping cart
+        # request.session['shopping_cart'] = {}
+
+        return render(request, 'checkout/checkout-template.html', {
+            'session_id': session.id,
+            'public_key': settings.STRIPE_PUBLISHABLE_KEY
         })
-
-    # get the current website
-    current_site = Site.objects.get_current()
-
-    # get the domain name
-    domain = current_site.domain
-
-    session = stripe.checkout.Session.create(
-        payment_method_types=['card'],
-        line_items=line_items,
-        client_reference_id=request.user.id,
-        metadata={
-            "all_product_ids": json.dumps(all_product_ids)
-        },
-        mode="payment",
-        success_url=settings.STRIPE_SUCCESS_URL,
-        cancel_url=settings.STRIPE_CANCEL_URL
-    )
-
-    # empty the shopping cart
-    request.session['shopping_cart'] = {}
-
-    return render(request, 'checkout/checkout-template.html', {
-        'session_id': session.id,
-        'public_key': settings.STRIPE_PUBLISHABLE_KEY
-    })
 
 
 def checkout_success(request):
@@ -157,12 +156,11 @@ def handle_payment(session):
         purchase.save()
 
 
-
 def show_purchases(request):
     # validation of username
     if not request.user.username == ('admin'):
         return redirect(reverse(show_products))
-    
+
     purchases = Purchase.objects.all()
     return render(request, 'checkout/show_purchases-template.html', {
         'purchases': purchases
