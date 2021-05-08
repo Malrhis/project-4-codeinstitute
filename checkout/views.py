@@ -7,13 +7,12 @@ from django.shortcuts import (render,
 from django.conf import settings
 import stripe
 import json
-
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from products.models import Product
 from checkout.models import Purchase
 
-from django.contrib.sites.models import Site
 
 from django.views.decorators.csrf import csrf_exempt
 from products.views import show_products
@@ -25,6 +24,7 @@ from cart.views import view_cart
 def checkout(request):
     cart = request.session.get('shopping_cart', {})
     if (len(cart) == 0):
+        messages.error(request,f"Fill up your cart first!")
         return(redirect(reverse(view_cart)))
     else:
         # tell Stripe what my api key is

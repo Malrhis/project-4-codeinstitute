@@ -15,8 +15,9 @@ from products.views import show_products
 def show_reviews(request):
     # validation of username
     if not request.user.username == ('admin'):
+        messages.error(request, f"Access Denied")
         return redirect(reverse(show_products))
-    
+
     reviews = Review.objects.all()
     return render(request, 'reviews/show-reviews.template.html', {
         'reviews': reviews
