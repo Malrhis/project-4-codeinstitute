@@ -45,7 +45,7 @@
                                     {{item.name}}</strong>
                             </p>
                             <p>
-                                Unit Price: <span class="lead">S$ {{item.price}}0</span>
+                                Unit Price: <span class="lead">S$ {{item.price}}</span>
                             </p>
                             <p class="mb-0">
                                 <form class="form-inline form-group" method="POST"
@@ -57,7 +57,7 @@
                                 </form>
                             </p>
                             <p>
-                                Subtotal: <span class="lead">S$ {{item.total_price}}0</span>
+                                Subtotal: <span class="lead">S$ {{item.total_price}}</span>
                             </p>
                             <p class="mb-0 mt-5">
                                 <a href="{% url 'remove_from_cart' product_id=item.id %}"
