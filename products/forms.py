@@ -1,6 +1,6 @@
 # ProductForm
 from django import forms
-from .models import Product, ProductType, Colour, Tag
+from .models import Product, ProductType
 
 
 class ProductForm(forms.ModelForm):
