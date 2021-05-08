@@ -50,7 +50,7 @@ def view_product_details(request, product_id):
 def create_product(request):
     # validation of username
     if not request.user.username == ('admin'):
-        messages.error(request,f"Access Denied")
+        messages.error(request, f"Access Denied")
         return redirect(reverse(show_products))
 
     if request.method == 'POST':
@@ -77,7 +77,7 @@ def create_product(request):
 def update_product(request, product_id):
     # validation of username
     if not request.user.username == ('admin'):
-        messages.error(request,f"Access Denied")
+        messages.error(request, f"Access Denied")
         return redirect(reverse(show_products))
 
     # Get product to be updated from db
@@ -112,7 +112,7 @@ def update_product(request, product_id):
 def delete_product(request, product_id):
     # validation of username
     if not request.user.username == ('admin'):
-        messages.error(request,f"Access Denied")
+        messages.error(request, f"Access Denied")
         return redirect(reverse(show_products))
 
     product_to_delete = get_object_or_404(Product, pk=product_id)
