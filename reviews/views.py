@@ -1,6 +1,5 @@
 # reviews views.py
 from django.shortcuts import (render,
-                              HttpResponse,
                               redirect,
                               reverse,
                               get_object_or_404)

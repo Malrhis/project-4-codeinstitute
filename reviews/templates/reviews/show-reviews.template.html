@@ -2,21 +2,20 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
+{% block css %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock %}
+
 {% block title %}
 Review Listing
-{% endblock %} 
+{% endblock %}
 
-{% block content %} 
+{% block content %}
+<section class="container">
     <h1>Review Listing</h1>
 
-    {% if request.user.is_authenticated  %}
-    <p>Welcome {{request.user}}</p>
-    {% else %}
-    <p>Please <a href="/accounts/login">Login</a></p>
-    {%endif%}
-
     <p>
-        List of Mel's Pampas Grass Reviews
+        List of all reviews
     </p>
 
     <table class="table">
@@ -47,5 +46,5 @@ Review Listing
             {% endfor %}
         </tbody>
     </table>
+</section>
 {% endblock %}
-</html>
