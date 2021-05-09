@@ -12,19 +12,49 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from products.models import Product
 from checkout.models import Purchase
-
-
 from django.views.decorators.csrf import csrf_exempt
 from products.views import show_products
 from cart.views import view_cart
-
+from .forms import AddressForm
 
 # Create your views here.
+
+
+@login_required
+def create_address(request):
+    cart = request.session.get('shopping_cart', {})
+    if (len(cart) == 0):
+        messages.error(request, f"Fill up your cart first!")
+        return(redirect(reverse(view_cart)))
+
+    if request.method == 'POST':
+        create_address_form = AddressForm(request.POST)
+
+        if create_address_form.is_valid():
+            address_created = create_address_form.save(commit=False)
+            address_created.user_id = request.user
+            create_address_form.save()
+            messages.success(
+                request,
+                f"You have successfully submitted your delivery details")
+            return redirect(reverse(checkout))
+        else:
+            return render(request, 'checkout/create_address-template.html', {
+                'form': create_address_form
+            })
+
+    else:
+        create_address_form = AddressForm()
+        return render(request, 'checkout/create_address-template.html', {
+            'form': create_address_form
+        })
+
+
 @login_required
 def checkout(request):
     cart = request.session.get('shopping_cart', {})
     if (len(cart) == 0):
-        messages.error(request,f"Fill up your cart first!")
+        messages.error(request, f"Fill up your cart first!")
         return(redirect(reverse(view_cart)))
     else:
         # tell Stripe what my api key is
