@@ -20,11 +20,8 @@ footer {
     background-size: cover;
 }
 
-.featurette-two {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://magazinec.com/wp-content/uploads/2019/07/Hero-9.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.featurette-two-img{
+    width:10rem;
 }
 
 .form-inline .form-group {
