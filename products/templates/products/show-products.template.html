@@ -38,13 +38,13 @@ Product Listing
                             href="{% url 'view_product_details_route' product_id=product.id %}">{{product.name}}</a>
                     </h5>
                     <p class="card-text mb-0">{{product.product_type}}</p>
-                    <p class="card-text mb-0">{{product.price}}</p>
+                    <p class="card-text mb-0">S$ {{product.price}}</p>
                     <p class="card-text mb-0">{{product.colour}}</p>
-                    <p class="card-text mb-0">{{product.length}}</p>
+                    <p class="card-text mb-0">{{product.length}} cm</p>
                     {% for tag in product.tag.all %}
-                    <p class="card-text mb-0">{{tag}}</p>
+                    <p class="badge badge-dark mb-0">{{tag}}</p>
                     {% endfor %}
-                    <p class="card-text">{{product.quantity}}</p>
+                    <p class="card-text">Quantity Left: {{product.quantity}}</p>
                     <a href="{% url 'add_to_cart' product_id=product.id %}" class="btn btn-dark btn-sm">Add to Cart</a>
                 </div>
             </div>
