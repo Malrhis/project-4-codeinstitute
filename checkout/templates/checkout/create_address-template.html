@@ -13,13 +13,15 @@ Add Delivery Address
 {% block content %}
 <div class="container">
     <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h1 class="display-4">Delivery Address Form</h1>
-      <p class="lead">Please note that failing to provide accurate data could result in shipment erros</p>
+        <h1 class="display-4">Delivery Address Form</h1>
+        <p class="lead text-danger mb-0">Please ensure your details are accurate</p>
+        <p class="lead text-danger mb-0">Only addresses in Singapore will be honoured</p>
+        <p class="lead text-danger mb-0">Please note that failing to provide accurate data could result in shipment errors</p>
     </div>
-    <form method="POST">
+    <form class="form-group" method="POST">
         {% csrf_token %}
         {{ form|crispy }}
-        <input type="Submit" value="Submit & Proceed to Checkout" />
+        <input class="btn-lg btn btn-success" type="Submit" value="Submit & Proceed to Checkout" />
     </form>
 </div>
 {% endblock %}

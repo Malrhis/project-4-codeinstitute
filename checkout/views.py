@@ -36,9 +36,12 @@ def create_address(request):
             create_address_form.save()
             messages.success(
                 request,
-                f"You have successfully submitted your delivery details")
+                f"Thank you for your purchase. We have received your delivery details")
             return redirect(reverse(checkout))
         else:
+            messages.error(
+                request,
+                f"Invalid Address Field")
             return render(request, 'checkout/create_address-template.html', {
                 'form': create_address_form
             })
