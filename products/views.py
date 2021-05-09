@@ -6,7 +6,6 @@ from django.shortcuts import (render,
 from django.contrib import messages
 from django.db.models import Q
 from .models import Product
-from reviews.models import Review
 from .forms import ProductForm, SearchForm
 
 # Create your views here.

@@ -6,4 +6,3 @@ admin.site.register(Product)
 admin.site.register(ProductType)
 admin.site.register(Colour)
 admin.site.register(Tag)
-
