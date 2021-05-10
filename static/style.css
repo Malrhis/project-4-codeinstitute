@@ -1,31 +1,38 @@
 /* Homepage Styling */
 .navbar {
-  font-family: "Roboto", sans-serif;
-  font-weight: 300;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
 }
 
-.navbar-brand{
-  font-family: "Roboto", sans-serif;
-  font-weight: 600;
+.navbar-brand {
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
 }
 
 .navbar-text {
-  font-family: "Roboto", sans-serif;
-  font-style: italic;
-  font-weight: 100;
+    font-family: "Roboto", sans-serif;
+    font-style: italic;
+    font-weight: 100;
 }
 
 .carousel-caption {
-  font-family: "Roboto", sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .body {
-  font-family: "Roboto", sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
+/* footer styling */
+footer {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+}
+
+
 .featurette-one-text {
-  font-family: "Roboto", sans-serif;
-  font-weight: 300;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
 }
 
 .push-navbar-down {
@@ -39,8 +46,8 @@
     background-size: cover;
 }
 
-.featurette-two-img{
-    width:10rem;
+.featurette-two-img {
+    width: 10rem;
 }
 
 .form-inline .form-group {
@@ -65,6 +72,6 @@ label {
     background-size: cover;
 }
 
-.cart-quantity-input{
+.cart-quantity-input {
     width: 40px;
 }
