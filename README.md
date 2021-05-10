@@ -1,6 +1,6 @@
-# Start of the aquarist's resource
+# Pampas Collective SG's Store
 
-# <img style="height:300px" src="static/images/pampas-collective-logo.jpeg"> Aquarist's Resource (Freshwater Ver.)
+# <img style="height:150px" src="static/images/pampas-collective-logo.jpeg"> Aquarist's Resource (Freshwater Ver.)
 
 # 1. Background & Objective
 ## Background / Problem Statement
