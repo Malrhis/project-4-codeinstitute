@@ -91,8 +91,6 @@ For the buyers
 <br>
 
 # 5. Key Features
-- 
-
 ## 5.1 Feature List
 |# | Name          | Main User | Description   |     
 | -| ------------- |-------------| -------------|
@@ -110,13 +108,21 @@ For the buyers
 Database design started with ER diagram, and then graduated to a full-blown Logical Schema Diagram to represent the `models` to build in `django`
 
 ## 6.1 Entity Relationship Diagram AKA ER Diagram
-<img height="300px" src="static/images/er-diagram.png">
+<img height="600px" src="static/images/er-diagram.png">
 
 ER diagram was first used to have a high level view of all entities that might be involved in designing a store
 
 ## 6.1 Logical Schema Diagram
-insert here
+<img height="700px" src="static/images/logical-schema.png">
 
+Logical schema was developed to have the following tables:
+1. Products
+2. Reviews of each product
+3. User - from `django` as a default
+4. Purchase - historical payments
+5. Address - details of delivery address
+
+`Cart` is technically not a database, since it makses use of `sessions` but is added to the diagram for completeness, since it serves as a holding space for inventory when users add to cart.
 
 
 # 6. Prototyping
