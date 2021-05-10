@@ -1,5 +1,5 @@
 # Pampas Collective SG's Store
-# <img style="height: 30px" src="static/images/pampas-collective-logo.jpeg">
+<img style="height: 30px" src="static/images/pampas-collective-logo.jpeg">
 
 # 1. Background & Objective
 ## Background / Problem Statement
