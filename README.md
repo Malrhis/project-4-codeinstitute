@@ -3,20 +3,28 @@
 
 # 1. Background & Objective
 ## Background / Problem Statement
--
+- The store administrator/owner is currently selling via South East Asia's largest e-commerce platform [Link to Shopee.sg store](https://shopee.sg/melodyamanda7?categoryId=11&itemId=3760378194)
+- Need to have own store - similar to most other businesses based in singapore, to build credibility and online presence.
+
+Sample of stores that other small businesses have
+
+* [IvenBetta](https://ivenbetta.com/)
+* [Petitefleur](https://www.petitefleursg.com/)
+
 
 ## Objective
--
-
-
-## Purpose and Value to users
-
-1. 
+* Design and build a store for Pampas Collective SG
+* Pampas Collective needs
+    1. Mobile responsive store front-end with landing page
+    2. Checkout and payment function
+    3. Display products in their inventory
+    4. Database to store products/transactions
+    5. Different access levels to buyers vs store owner
 
 <br>
 
 # 2. Demo (Heroku)
-Site is published via Heroku and can be viewed [here]()
+Site is published via Heroku and can be viewed [here](https://pampas-collective.herokuapp.com/)
 
 <br>
 
@@ -47,39 +55,64 @@ Site is published via Heroku and can be viewed [here]()
 - pip3 install Pillow
 - pip3 install whitenoise 
 
-## 3.2 Python Libraries used
+## 3.2 Python Libraries used in `views.py`
+Below are the general libraries used to generate the different view functions in `views.py`
 ```
-from flask import Flask, render_template, request, redirect, url_for
+from django.shortcuts import (render,
+                              redirect,
+                              reverse,
+                              get_object_or_404)
+from django.contrib import messages
+from django.db.models import Q
 ```
 
 <br>
 
 # 4. The Goals: User Stories or (JTBD) Jobs-to-be-Done
-
-The store administrator/owner is currently selling via South East Asia's largest e-commerce platform [Link to Shopee.sg store](https://shopee.sg/melodyamanda7?categoryId=11&itemId=3760378194)
-
 For the small time e-commerce business store owner selling pampasgrass:
+```
+1. I want to be able to list my products, so that users can see the pictures and the price of my items - perform standard CRUD for all my product listings
+2. I want to be able to categorise my products based on certain type groups
+3. I want my store to be mobile-responsive so that users can shop on the go
+4. I want to be able to collect payment from users via the store
+5. I want to be able to get delivery addresses for each successful purchase
+6. I want to be users to be able to review the products on the website
+7. I want to use my store for inventory management, so that I don't let buyers buy what I don't have in my inventory
+```
 
+For the buyers
 ```
-1. I want to...
+1. I want to be able to search and sort through the products
+2. I want to be able to see how many of each item has left in stock
+3. I want to be able to pay without hassle
+4. I want to be able to leave a review about the products on the website.
 ```
+
 <br>
 
 # 5. Key Features
 - 
 
 ## 5.1 Feature List
-|# | Name          | Description   |     
-| -| ------------- |-------------|
-|1 |  || 
+|# | Name          | Main User | Description   |     
+| -| ------------- |-------------| -------------|
+|1 | Landing page | Buyers |Learn about the company, view different product categories|
+|2 | Product page | Buyers, Seller | View stock and checkout products|
+|3 | Search function | Buyers | Simple search via name, and dropdown for product types|
+|4 | Product details | Buyers | to view more details of each product |
+|5 | Reviews Creation | Buyers | Create reviews for each product |
+|6 | Product Create, Update, Delete | Seller | Update `models` without needing django admin |
+|7 | Access controls | Seller | Only logged in users, and the whitelisted `admin` user can view certain functions (e.g. product Create Update and Delete) |
 
 <br>
 
 # 6. Database Design
-insert here
+Database design started with ER diagram, and then graduated to a full-blown Logical Schema Diagram to represent the `models` to build in `django`
 
 ## 6.1 Entity Relationship Diagram AKA ER Diagram
-insert here
+<img height="300px" src="static/images/er-diagram.png">
+
+ER diagram was first used to have a high level view of all entities that might be involved in designing a store
 
 ## 6.1 Logical Schema Diagram
 insert here
