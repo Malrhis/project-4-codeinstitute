@@ -172,7 +172,9 @@ def handle_payment(session):
     all_product_ids = json.loads(all_product_ids_str)
 
     # go through each book id
+    # set counter
     count = -1
+    # loop through all product_ids:
     for x in all_product_ids:
         count += 1
         product_id = all_product_ids[count]['product_id']
@@ -187,6 +189,12 @@ def handle_payment(session):
         purchase.price = product_model.price
         purchase.qty = qty
         purchase.save()
+
+        # # reduce inventory
+        # product_being_updated = get_object_or_404(Product, pk=product_id)
+        # product_being_updated.qty = product_being_updated.qty - purchase.qty
+        # product_being_updated.save()
+
 
 
 def show_purchases(request):

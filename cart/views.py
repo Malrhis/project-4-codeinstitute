@@ -5,7 +5,7 @@ from django.shortcuts import (render,
                               get_object_or_404)
 from django.contrib import messages
 from products.models import Product
-
+from products.views import show_products
 # Create your views here.
 
 
@@ -15,8 +15,10 @@ def view_cart(request):
 
     cart_total = 0
 
+    # generate cart total
     for product_id in cart:
-        cart_total = cart[product_id]['total_price'] + cart_total
+        cart_total = round(
+            float(cart[product_id]['total_price']), 2) + cart_total
 
     return render(request, 'cart/view_cart-template.html', {
         'cart': cart,
@@ -34,10 +36,17 @@ def add_to_cart(request, product_id):
     # criteria is product_id
     product = get_object_or_404(Product, pk=product_id)
 
+    if product.quantity < 1:
+        messages.error(request, f"Item is no longer in stock")
+        return(redirect(reverse(show_products)))
+
     if product_id in cart:
         cart[product_id]['qty'] += 1
-        cart[product_id]['total_price'] = float(
-            cart[product_id]['price']) * int(cart[product_id]['qty'])
+        cart[product_id]['total_price'] = round(float(
+            cart[product_id]['price']) * int(cart[product_id]['qty']),2)
+
+        product.quantity = product.quantity - 1
+        product.save()
 
     # create cart dictionary with product_id as the key
     else:
@@ -46,10 +55,13 @@ def add_to_cart(request, product_id):
             'id': product_id,
             'name': product.name,
             'image': product.image.cdn_url,
-            'price': float(product.price),
-            'total_price': float(product.price),
+            'price': round(float(product.price), 2),
+            'total_price': round(float(product.price),2),
             'qty': 1
         }
+        # reduce quantity
+        product.quantity = product.quantity - 1
+        product.save()
 
     # save the shopping cart
     request.session['shopping_cart'] = cart
@@ -65,10 +77,19 @@ def remove_from_cart(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
 
     if product_id in cart:
+
+        # how much is in the cart?
+        qty_in_cart = cart[product_id]['qty']
+
         # delete key from cart
         del cart[product_id]
         # save cart back into session
         request.session['shopping_cart'] = cart
+
+        # update quantity
+        product.quantity = product.quantity + qty_in_cart
+        product.save()
+
         messages.success(request, (str(product.name) +
                                    " has been removed from cart"))
 
@@ -82,13 +103,26 @@ def update_item_quantity(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
 
     if product_id in cart:
-        # replace the qty under the product id key with the name="qty"
-        # from request.POST
-        cart[product_id]['qty'] = int(request.POST['qty'])
-        cart[product_id]['total_price'] = float(
-            cart[product_id]['price']) * int(request.POST['qty'])
-        request.session['shopping_cart'] = cart
-        messages.success(request, (str(product.name) +
-                                   " quantity has been updated"))
+        # check qty
+        eligible_stock = product.quantity
+        incremental_added_to_cart = (
+            int(request.POST['qty']) - cart[product_id]['qty'])
+        if incremental_added_to_cart > eligible_stock:
+            messages.error(request, f"Exceeded available stock")
+            return(redirect(reverse(view_cart)))
+        elif incremental_added_to_cart <= eligible_stock:
+            # replace the qty under the product id key with the name="qty"
+            # from request.POST
+            cart[product_id]['qty'] = int(request.POST['qty'])
+            cart[product_id]['total_price'] = round(float(
+                cart[product_id]['price']) * int(request.POST['qty']), 2)
+            request.session['shopping_cart'] = cart
+
+            # update inventory
+            product.quantity = product.quantity - incremental_added_to_cart
+            product.save()
+
+            messages.success(request, (str(product.name) +
+                                       " quantity has been updated"))
 
     return redirect(reverse('view_cart'))
