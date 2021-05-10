@@ -22,9 +22,11 @@
                 <p class="mb-1 lead text-right"><strong>Grand Total: S$ {{cart_total}}</strong></p>
             </div>
             <div class="row-fluid text-right">
-                <p class="d-inline-block"><a href="{% url 'show_product_route' %}" class="btn btn-light border border-dark mb-3">Continue
+                <p class="d-inline-block"><a href="{% url 'show_product_route' %}"
+                        class="btn btn-light border border-dark mb-3">Continue
                         Shopping</a></p>
-                <p class="d-inline-block"><a href="{% url 'create_address' %}" class="btn btn-dark mb-3">Checkout</a></p>
+                <p class="d-inline-block"><a href="{% url 'create_address' %}" class="btn btn-dark mb-3">Checkout</a>
+                </p>
             </div>
         </div>
     </section>
@@ -34,15 +36,17 @@
         <li class="list-group-item">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-sm-4">
                         <div>
                             <img class="card-img img-fluid border border-dark" src="{{item.image}}" />
                         </div>
                     </div>
-                    <div class="col-md-6 py-4">
+                    <div class="col-sm-8 py-4">
                         <div>
                             <p class="text-uppercase"><strong>
-                                    {{item.name}}</strong>
+                                    <a
+                                        href="{% url 'view_product_details_route' product_id=item.id %}">{{item.name}}</a>
+                                </strong>
                             </p>
                             <p>
                                 Unit Price: <span class="lead">S$ {{item.price}}</span>
