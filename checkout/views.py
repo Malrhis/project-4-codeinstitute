@@ -155,10 +155,6 @@ def payment_completed(request):
         session = event['data']['object']
 
         # call handle_payment function to handle the payment complete
-        all_product_ids_str = session["metadata"]["all_product_ids"]
-        all_product_ids = json.loads(all_product_ids_str)
-        print(all_product_ids)
-
         handle_payment(session)
 
     return HttpResponse(status=200)
@@ -189,12 +185,6 @@ def handle_payment(session):
         purchase.price = product_model.price
         purchase.qty = qty
         purchase.save()
-
-        # # reduce inventory
-        # product_being_updated = get_object_or_404(Product, pk=product_id)
-        # product_being_updated.qty = product_being_updated.qty - purchase.qty
-        # product_being_updated.save()
-
 
 
 def show_purchases(request):
