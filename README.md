@@ -1,6 +1,5 @@
 # Pampas Collective SG's Store
-
-# <img style="height:150px" src="static/images/pampas-collective-logo.jpeg"> Aquarist's Resource (Freshwater Ver.)
+# <img style="height: 30px" src="static/images/pampas-collective-logo.jpeg">
 
 # 1. Background & Objective
 ## Background / Problem Statement
