@@ -43,7 +43,7 @@ def add_to_cart(request, product_id):
     if product_id in cart:
         cart[product_id]['qty'] += 1
         cart[product_id]['total_price'] = round(float(
-            cart[product_id]['price']) * int(cart[product_id]['qty']),2)
+            cart[product_id]['price']) * int(cart[product_id]['qty']), 2)
 
         product.quantity = product.quantity - 1
         product.save()
@@ -56,7 +56,7 @@ def add_to_cart(request, product_id):
             'name': product.name,
             'image': product.image.cdn_url,
             'price': round(float(product.price), 2),
-            'total_price': round(float(product.price),2),
+            'total_price': round(float(product.price), 2),
             'qty': 1
         }
         # reduce quantity
@@ -103,6 +103,12 @@ def update_item_quantity(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
 
     if product_id in cart:
+        # check if update form is giving zero qty
+        # zero quantity means removing item from cart
+        if int(request.POST['qty']) == 0:
+            messages.error(request, f"You cannot have enter a value of zero for quantity. Please remove the item from the cart if you wish to delete it.")
+            return(redirect(reverse(view_cart)))
+
         # check qty
         eligible_stock = product.quantity
         incremental_added_to_cart = (
