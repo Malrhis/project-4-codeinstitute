@@ -127,6 +127,7 @@ Logical schema was developed to have the following tables:
 
 # 6. Prototyping
 Simple Prototyping was done directly using MS Powerpoint to mock-up the features of the website.
+<img height="700px" src="static/images/mock-up-group-1.png">
 
 ## 6.1 Front-End UI Mock-up
 <img style="height:400px" src="" >
