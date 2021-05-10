@@ -127,13 +127,12 @@ Logical schema was developed to have the following tables:
 
 # 6. Prototyping
 Simple Prototyping was done directly using MS Powerpoint to mock-up the features of the website.
-<img height="700px" src="static/images/mock-up-group-1.png">
+<img height="400px" src="static/images/mock-up-group-1.png">
+<img height="400px" src="static/images/mock-up-group-2.png">
 
-## 6.1 Front-End UI Mock-up
-<img style="height:400px" src="" >
-
-Reference was taken from
-- insert sites which were used for inspiration
+Online Web store Reference was taken from
+- [IvenBetta.com](https://ivenbetta.com/) - for landing pages, product categories, mobile responsivness
+- [https://shopee.sg/](https://shopee.sg/) - Accounts handling, storage of addresses, cart layout
 
 ## 6.2 Actual Final Design
 The final design aims to provide a solution to all user stories listed in `section 4 The Goals: User Stories or (JTBD) Jobs-to-be-Done` 
