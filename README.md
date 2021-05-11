@@ -278,12 +278,11 @@ TEST_EMAIL
 ## Pamspas Product & Images
 - Credits to my deal wife melody amanda, and her furious photoshoots of her products in the basement of our marital home.
 
-
 <br>
 
 # 12. Testing
 ## 12.1 Code Validation using Code Validators
-- `static/style.css` was validated using the W3C Jigsaw validator ([Link](https://jigsaw.w3.org/css-validator/validator))
+- `static/style.css` was validated using the W3C Jigsaw validator ([Link](https://jigsaw.w3.org/css-validator/))
   - No issues were found with `style.css`
   
 - all `.html` files in `templates` was validated using the W3 Nu HTML Validator ([Link](https://validator.w3.org/nu/#file))

@@ -6,17 +6,21 @@
 <link rel="stylesheet" href="{% static 'style.css' %}">
 {% endblock %}
 
+{% block title %}
+Shopping Cart
+{% endblock %}
+
 {% block content %}
 <div class="container">
-    <section class="cart-banner jumbotron text-center border">
+    <div class="cart-banner jumbotron text-center border">
         <div class="container">
             <h1 class="jumbotron-heading">Shopping Cart</h1>
             <p class="lead">Items you added into your cart</p>
             <ul class="list-group">
         </div>
-    </section>
+    </div>
     <hr class="mb-3">
-    <section>
+    <div>
         <div class="container">
             <div class="row-fluid">
                 <p class="mb-1 lead text-right"><strong>Grand Total: S$ {{cart_total}}</strong></p>
@@ -29,16 +33,16 @@
                 </p>
             </div>
         </div>
-    </section>
+    </div>
     <hr class="my-1">
-    <section class="my-3">
+    <div class="my-3">
         {% for key, item in cart.items %}
         <li class="list-group-item">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-4">
                         <div>
-                            <img class="card-img img-fluid border border-dark" src="{{item.image}}" />
+                            <img class="card-img img-fluid border border-dark" src="{{item.image}}" alt="cart-image" />
                         </div>
                     </div>
                     <div class="col-sm-8 py-4">
@@ -73,7 +77,7 @@
             </div>
         </li>
         {% endfor %}
-    </section>
+    </div>
 </div>
 
 {% endblock %}

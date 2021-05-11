@@ -21,18 +21,18 @@ Product Listing
 </div>
 <div class="container">
 
-    <section class="products-banner border border-dark shadow jumbotron text-center">
+    <div class="products-banner border border-dark shadow jumbotron text-center">
         <div class="container">
             <h1 class="jumbotron-heading">Our Products</h1>
             <p class="lead">Specially curated for your home decor needs</p>
         </div>
-    </section>
+    </div>
 
-    <section class="row">
+    <div class="row">
         {% for product in products %}
         <div class="col-md-6 col-lg-4 mb-5">
             <div class="card h-100 shadow">
-                <img class="card-img-top img-fluid" src="{{product.image.cdn_url}}" />
+                <img class="card-img-top img-fluid" src="{{product.image.cdn_url}}" alt="product-image" />
                 <div class="card-body">
                     <h5 class="card-title"><a
                             href="{% url 'view_product_details_route' product_id=product.id %}">{{product.name}}</a>
@@ -50,6 +50,6 @@ Product Listing
             </div>
         </div>
         {% endfor %}
-    </section>
+    </div>
 </div>
 {% endblock %}

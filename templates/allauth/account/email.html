@@ -13,11 +13,11 @@
 {% block content %}
 <div class="container my-3">
 
-    <section class="login-banner jumbotron text-center">
+    <div class="login-banner jumbotron text-center">
         <div class="container">
             <h1 class="jumbotron-heading">{% trans "E-mail Addresses" %}</h1>
         </div>
-    </section>
+    </div>
 
     {% if user.emailaddress_set.all %}
     <p class="lead">{% trans 'The following e-mail addresses are associated with your account:' %}</p>
