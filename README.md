@@ -145,9 +145,10 @@ The final design aims to provide a solution to all user stories listed in `secti
 ```
 
 ## 6.3 Colour
-#
+Bootrap's dark theme was used
 ```
-Color schemes if any
+class= "btn-dark"
+class= "navbar-dar"
 ```
 <br>
 
@@ -165,17 +166,82 @@ Color schemes if any
 
 The below `code snippets` were added to the HTML in `base.template.html` to invoke the boostrap framework
 ```
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+<!--JQuery -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 
+<!-- Popper JS -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 
+<!-- Bootstrap min JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 ```
 
-## 8.2 Toastr Implemetation
-- insert information here
+## 8.2 Toastr Implementation
+- Toastr was used instead of just flash messages displayed as a HTML div
+
+The below `code snippets` were added to the HTML in `base.template.html` to be able to use toastr
+```
+<!-- Toastr CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+<!--JQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xU+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<!-- Toaster JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+```
+
+### 8.2.1 Toastr Messages implementation
+Reference was taken from [this stackoverflow page](https://stackoverflow.com/questions/45004245/how-to-use-toastr-in-django-for-success-or-fail-message) on how to implement toastr with django
+
+```
+{% if messages %}
+    {% for message in messages %}
+    {% if message.tags == 'success'%}
+    <script type=text/javascript>
+        toastr.{{message.tags}}('{{ message }}')
+    </script>
+    {% elif message.tags == 'info' %}
+    <script type=text/javascript>
+        toastr.{{message.tags}}('{{ message }}')
+    </script>
+    {% elif message.tags == 'warning' %}
+    <script type=text/javascript>
+        toastr.{{message.tags}}('{{ message }}')
+    </script>
+    {% elif message.tags == 'error' %}
+    <script type=text/javascript>
+        toastr.{{message.tags}}('{{ message }}')
+    </script>
+    {% endif %}
+    {% endfor %}
+{% endif %}
+```
+
+Toastr options comes from the [toastr demo page](https://codeseven.github.io/toastr/demo.html)
+```
+// Toaster options
+toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": false,
+    "positionClass": "toast-bottom-full-width",
+    "preventDuplicates": true,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+}
+```
 
 <br>
 
@@ -184,68 +250,46 @@ The below `code snippets` were added to the HTML in `base.template.html` to invo
 ## 9.1
 The following were used in the .env file
 ```
-MONGO_URI
-SECRET_KEY
+# for uploadcare:
+UPLOADCARE_PUBLIC_KEY
+UPLOADCARE_SECRET_KEY
+
+# for stripe payment
+STRIPE_PUBLISHABLE_KEY
+STRIPE_SECRET_KEY
+STRIPE_SUCCESS_URL
+STRIPE_CANCEL_URL
+STRIPE_ENDPOINT_SECRET
+
+# linking to database on heroku
+DATABASE_URL
+
+# sending email via gmail
+EMAIL_HOST_PASS
+EMAIL_HOST_USER
+TEST_EMAIL
 ```
 
-MONGO_URI is to enable connection to mongoDB
-SECRET_KEY is used to enable `flash` messages
 
 # 10. Content Credits
-## Pamspas Product 
-- Insert here
+## Hero Banner
+- Credit to https://magazinec.com/wp-content/uploads/2019/07/Hero-9.jpg 
 
-## Images
-- Credited to my deal wife melody amanda, and her furious photoshoots of her products in the basement of our marital home.
-- Insert here
+## Pamspas Product & Images
+- Credits to my deal wife melody amanda, and her furious photoshoots of her products in the basement of our marital home.
 
-
-<br>
-
-# 11. Non-relational Data Model Design of Fish and Plants Collection
-Fish and plants collections are stored in mongoDB. Each document will essentially carry all the information required so that front end can render a card for each plant or fish
-
-## 11.1 Relational database design philosophy:
-1. Should encompass enough information about each fish and plant to allow users to find the information useful for their hobby
-2. Front-end should display each document of fish or plant as a card
-3. Card should have images
-4. Images can be provided and stored as a string of text which in turn can be used as HTML `href`
-5. Field related to numerical values has to have validation and checks: for instance: `Water's pH` cannot be negative: it has to be a `float` that is postiive
-6. Field with restricted options should be restricted on the front end and stored as sting in the backend.
-7. Determining of whether information is sufficient or not will draw on my personal knowledge of fish-keeping and aquascaping.
-
-
-## 11.2 Input types for html
-- Chosen based on logicality of the value required to be stored.
-    - for instance: `Water's pH` cannot be negative: it has to be a `float` that is postiive
-- If only a few options are available, fix the options via `dropdown` `select`
-    - Diet: Carnivore, Herbivore, Omnivore
-
-## 11.3 Importance of water parameters as data points
-- the crux of all aquarium keeping is the water quality. 
-- hence each card should have a separate section specially for water quality
-```
-water_temp_in_degc:"25.0"
-pH:"6.0"
-```
-
-## 11.4 Importance of anecdotal evidence stored as string/text
-```
-tank_setup_text:"Can be maintained in a fully-decorated aquarium although many breeders..."
-```
-Much of the key information about fish-keeping and plant keeping is rooted in word of mouth. One of the key-value pairs has to be dedicated to allowing users to add as much text as possible to guide others to successful fish-keeping
 
 <br>
 
 # 12. Testing
 ## 12.1 Code Validation using Code Validators
-- `style.css` was validated using the W3C Jigsaw validator ([Link](https://jigsaw.w3.org/css-validator/validator))
+- `static/style.css` was validated using the W3C Jigsaw validator ([Link](https://jigsaw.w3.org/css-validator/validator))
   - No issues were found with `style.css`
   
 - all `.html` files in `templates` was validated using the W3 Nu HTML Validator ([Link](https://validator.w3.org/nu/#file))
 
 ## 12.2 PEP8 Style guide for Python
-All code in `app.py` complies with `PEP8` [Style guide](https://www.python.org/dev/peps/pep-0008/) 
+All code in `.py` files comply with `PEP8` [Style guide](https://www.python.org/dev/peps/pep-0008/) 
 
 This is ensured by making sure no callouts from gitpod python linter are present in `app.py` and that no lines of code in `app.py` exceed 79 Characters
 
