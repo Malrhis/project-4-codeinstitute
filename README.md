@@ -137,6 +137,7 @@ Online Web store Reference was taken from
 ## 6.2 Actual Final Design
 The final design aims to provide a solution to all user stories listed in `section 4 The Goals: User Stories or (JTBD) Jobs-to-be-Done` 
 
+
 ### 6.2.1 Search Section
 <img style="height:300px" src="" >
 
@@ -154,7 +155,7 @@ class= "navbar-dar"
 
 # 7. Detailed Features Write-up
 ## 7.1 Search Bar
-- how as each implemented?
+- how was each implemented?
 
 ## 7.1.1 Search Bar Validation
 - simple if function to prevent empty string from being processed
@@ -248,7 +249,10 @@ toastr.options = {
 # 9. Environment setup
 
 ## 9.1
-The following were used in the .env file
+- The following were used in the .env file during development. 
+- For Heroku, these are stored under Heroku settings > Config vars
+- These values were then passed to `settings.py` via `os.environ.get()`
+
 ```
 # for uploadcare:
 UPLOADCARE_PUBLIC_KEY
@@ -273,10 +277,10 @@ TEST_EMAIL
 
 # 10. Content Credits
 ## Hero Banner
-- Credit to https://magazinec.com/wp-content/uploads/2019/07/Hero-9.jpg 
+- Credits to magazinec.com https://magazinec.com/wp-content/uploads/2019/07/Hero-9.jpg 
 
 ## Pamspas Product & Images
-- Credits to my deal wife melody amanda, and her furious photoshoots of her products in the basement of our marital home.
+- Credits to my deal wife melody amanda, and her DIY photoshoots of her products in the basement of our marital home.
 
 <br>
 
@@ -293,23 +297,22 @@ All code in `.py` files comply with `PEP8` [Style guide](https://www.python.org/
 This is ensured by making sure no callouts from gitpod python linter are present in `app.py` and that no lines of code in `app.py` exceed 79 Characters
 
 ## 12.2 Testing and Bug Fixes (Test Case Table)
+Manual testing was conducted to ensure `Usability`, `Functionality` and `Responsiveness`
 
 | # |Type| Test       | Result           | Fix/Expected Result  |
 |-- |--|------------- |:-------------:| -----:|
-|1  |Functionality| Search bar is supposed to display fish based on string entered | Displayed list fish that match the string | All OK |
-|2  |Usability| Enter random string of text which doesn't match into search bar | returns no fish/plants | All OK |
-|3  |Functionality| Display of all fields from mongo onto card in `show_all_fish` and `show_all_plants` | Show all fields from mongoDB in front end | Did not return `diet` element in `fish` template. was found that a wrong parameter was used (`plant` was used instead of `fish` and since plants don't have diets, front end was not displaying properly)
-|5  |Functionality| Validation of empty input for `create` & `update` | flash message to alert user that input during `create` and `update` cannot be empty | All OK
-|6  |Functionality| When error values are entered in `update`, supposed to merge `old values` and `error values` + display `flash` message so user knows which error occurred during validation and can edit their error | Only `old values` were showing | typo in `old values` and `error values` syntax. Was fixed quickly and now All OK
-|7  |Usability| Page buttons should only show `next page` in the first to 2nd last page. should not show in last page. `Previous page` should only show in 2nd to last page | Button order did not work properly, and `next page` was shown in the last page even though there are no more documents to be displayed | created new variable to store `last_page` value. If `page != last page` then display `next button`. All OK now
-|8  |Usability| style.css colour should be turquoise as that is the theme for the website | was stuck in black colour | Attempted to fix by moving file tree for `static`. Was found that `style.css` was being overwritted by the bootstrap class `navbar-dark`. Removed the class and the static file was synching |
-|9  |Usability| favicon should be displayed | favicon could not be displayed | Attempted bugfix using different `url for` syntax. Was fixed by clearing cache using `ctrl + f5` |
-|10 |Functionality| Delete document  | Document should be gone from fish/plant collection in mongo and on refresh, should not show in `show_all_fish` / `show_all_plants` | All Ok|
-|11 |Functionality| url routing using `url_for` | navigate all links on navbar and site to ensure navigation are not broken | Navigation All Ok |
-|12 |Responsiveness| Test screen size | Tested using Firefox to mock iPhone X, Samsung S9| Was found that cards were not `fluid` type. changed all cards to `fluid` so that they look better on mobile |
+|1  |Functionality| Search bar supposed to display matched words. regardless of case | Displayed product names that matched the searched string | All OK |
+|2  |Usability| Enter random string of text which doesn't match into search bar | returns no products since there's no match | All OK |
+|3  |Functionality| Display of all products | show all product cards on front end for `show_product` | Products were displayed, but did not have `cm` and `$` in the client side display. template was adapted to show the right symbols for each field |
+|5  |Functionality| Validation of empty input for `create` & `update` for product | Pop up messages for empty fields and field with type that don't match `models.py` | All OK
+|6  |Functionality| Cart needs to display `grand total price` of all items in cart | Float resulted in trailing digits like `25.XXXXXXX` |used `round(x,2)` to maintain to 2 decimal places |
+|7  |Usability| `@login` decorator testing. All cases where the decorator `@login` apprears above the `view` function should block the user from accessing the view. | User was forced to login for `products/create` and `update` as these functions are meant for administrators only and not generic users | All OK |
+|8  |Usability| Blocking users who hare not `admin` | users are shown a toastr message `Access is Denied` | All OK |
+|9  |Usability| Nav bar toggle should work when screen size is `small` | Navbar toggle was not working. Background of the navbar toggle was transparent | Custom css in `static/style.css` was causing the div to be limited to `70px`. Removed that custome css and now all OK |
+|10 |Functionality| Delete products  | product should be gone from products `db` | All Ok|
+|11 |Functionality| loading static files with `{% static 'x' %}` | Pictures, `css` from static were loaded ok without problems. | All Ok |
+|12 |Responsiveness| Test screen size | Tested using Firefox to mock iPhone X, Samsung S9| All Ok. Bootstrap responsiveness is as expected |
 |13 |Functionality & Responsiveness| Deployment test to heroku | clicked on heroku link in mobile phone and tested if pages were working correctly and responsively | All Ok |
-|14 |Usability| Browser Tab name should be correct | Found that browser tab name for plants create form was still named as fish create form | Changed  Jinja2 block and now All OK|
-|15 |Usability| Could not click button to go back from create fish and create plant form | No back button | Added back button in create fish template |
 
 <br>
 
