@@ -309,10 +309,11 @@ Manual testing was conducted to ensure `Usability`, `Functionality` and `Respons
 |7  |Usability| `@login` decorator testing. All cases where the decorator `@login` apprears above the `view` function should block the user from accessing the view. | User was forced to login for `products/create` and `update` as these functions are meant for administrators only and not generic users | All OK |
 |8  |Usability| Blocking users who hare not `admin` | users are shown a toastr message `Access is Denied` | All OK |
 |9  |Usability| Nav bar toggle should work when screen size is `small` | Navbar toggle was not working. Background of the navbar toggle was transparent | Custom css in `static/style.css` was causing the div to be limited to `70px`. Removed that custome css and now all OK |
-|10 |Functionality| Delete products  | product should be gone from products `db` | All Ok|
+|10 |Functionality| Delete products  | product should be gone from products `db` | All Ok |
 |11 |Functionality| loading static files with `{% static 'x' %}` | Pictures, `css` from static were loaded ok without problems. | All Ok |
 |12 |Responsiveness| Test screen size | Tested using Firefox to mock iPhone X, Samsung S9| All Ok. Bootstrap responsiveness is as expected |
 |13 |Functionality & Responsiveness| Deployment test to heroku | clicked on heroku link in mobile phone and tested if pages were working correctly and responsively | All Ok |
+|14 | Stripe checkout should have callback to local endpoint `STRIPE_ENDPOINT_SECRET` | stripe checkout did not reach callback endpoint | trouble shooting revealed that `metadata` was not being passed overproperly (client side) | Meta data was fixed by using the following format `metadata={"all_product_ids": json.dumps(all_product_ids)},` |
 
 <br>
 
