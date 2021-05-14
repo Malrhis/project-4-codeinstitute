@@ -13,15 +13,16 @@ Create New Product
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container my-3">
     <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h1 class="display-4">Create New Product</h1>
-      <p class="lead">Create a new product for sale</p>
+        <h1 class="display-4">Create New Product</h1>
+        <p class="lead">Create a new product for sale</p>
     </div>
     <form method="POST">
         {% csrf_token %}
         {{ form|crispy }}
-        <input type="Submit" value="Create Product" />
+        <input class="btn btn-success" type="Submit" value="Create Product" />
+        <a class="btn btn-dark my-3" href="/products">Back to Products</a>
     </form>
 </div>
 {% endblock %}
