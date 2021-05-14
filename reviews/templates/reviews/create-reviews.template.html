@@ -11,7 +11,7 @@ Reviewing {{product.name}}
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container my-3">
     <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         <h1 class="display-4">Write a review for {{product.name}}</h1>
         <p class="lead">Tell us what you think</p>
@@ -20,6 +20,8 @@ Reviewing {{product.name}}
         {% csrf_token %}
         {{ form|crispy }}
         <input class="btn btn-success btn-sm" type="Submit" value="Create Review" />
-        <a href="{% url 'view_product_details_route' product_id=product.id %}" class="btn btn-sm btn-danger">Back to product</a>
+        <a href="{% url 'view_product_details_route' product_id=product.id %}" class="btn btn-sm btn-danger">Back to
+            product</a>
     </form>
-    {% endblock %}
+</div>
+{% endblock %}
