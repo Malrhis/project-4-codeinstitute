@@ -36,7 +36,7 @@ def create_address(request):
             create_address_form.save()
             messages.success(
                 request,
-                f"Thank you for your purchase. We have received your delivery details")
+                f"Your delivery details have been saved")
             return redirect(reverse(checkout))
         else:
             messages.error(
