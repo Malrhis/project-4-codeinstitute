@@ -32,9 +32,9 @@ UPLOADCARE = {
 SECRET_KEY = 'django-insecure-taq#qrh_pggz4uo@&#u&k-z-x&k2d113$1+q)v$ve8ejd_jva1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["pampas-collective.herokuapp.com"]
+ALLOWED_HOSTS = ["*", "pampas-collective.herokuapp.com"]
 
 
 # Application definition
