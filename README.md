@@ -313,24 +313,34 @@ Manual testing was conducted to ensure `Usability`, `Functionality` and `Respons
 |11 |Functionality| loading static files with `{% static 'x' %}` | Pictures, `css` from static were loaded ok without problems. | All Ok |
 |12 |Responsiveness| Test screen size | Tested using Firefox to mock iPhone X, Samsung S9| All Ok. Bootstrap responsiveness is as expected |
 |13 |Functionality & Responsiveness| Deployment test to heroku | clicked on heroku link in mobile phone and tested if pages were working correctly and responsively | All Ok |
-|14 | Stripe checkout should have callback to local endpoint `STRIPE_ENDPOINT_SECRET` | stripe checkout did not reach callback endpoint | trouble shooting revealed that `metadata` was not being passed overproperly (client side) | Meta data was fixed by using the following format `metadata={"all_product_ids": json.dumps(all_product_ids)},` |
+|14 | Functionality |  Stripe checkout should have callback to local endpoint `STRIPE_ENDPOINT_SECRET` | stripe checkout did not reach callback endpoint | trouble shooting revealed that `metadata` was not being passed overproperly (client side) | Meta data was fixed by using the following format `metadata={"all_product_ids": json.dumps(all_product_ids)},` | 
+|15 | Functionality | `Checkout success` should redirect to `Checkout success` page after receiving call back from `Stripe`. |Redirect went to correct template | All OK| 
+|16 | Functionality |  `Checkout Cancelled` should redirect to `Checkout Cancelled` page after receiving call back from `Stripe`. |Redirect went to correct template | All OK| 
+|17 | Functionality | `Purchases` should be stored in `Purchases Model` after Checkout is successful | Failed to store in Purchases | Did not migrate after creating Purchases model. Subsequent attempts all OK | 
+|18 | Usability | Instances of `product.name` being rendered on front end template should be linked to `product-details.template.html | Links are working propery | All OK |
+
+
 
 <br>
 
 # 14. Deployment
+Deployment flow is entirely credited to our instructor in Singapore, Mr Paul Chor's instructions document at [this link](https://docs.google.com/document/d/1TYCxMEcnQKs8gs8IUBX2uXsFcZEqRP2BtNzGTuPM-rY/edit?usp=sharing)
 
-# 14.0 set `debug=False`!!! since we are going into production and no longer in development
+## 14.0 Things to check 
+1. set `debug=False`!!! since we are going into production and no longer in development
+2. Ensure that `settings.py` allowed hosts do not have `*`
+3. Do not upload the `.env` file
 
 ## 14.1 Preparation
-Before the site goes `live` the following elements are checked gitpod's native browser preview via open port `8000`. This is done by executing command in terminal `python3 app.py` to run the `flask app` in `app.py`
+Before the site goes `live` the following elements are checked gitpod's native browser preview via open port `8000`. This is done by executing command in terminal `python3 manage.py runserver`
 - Fulfillment of Learning objectives from 'Code Insitutes' Assessment Handbook`
 - Check all code linters and validators are clear
 - Check that all images src are not broken
 - Test viewport dynamic resizing for android (Samsung S9) and iOS (iPhone X/XS)
-- Check Create, Read, Display, Update, Delete functions from Fish to Plant
-- Ensure all elements of the fish or plant are displayed, including images rendered from `picture html url string` key-value pair stored in mongoDB document
+- Check Create, Read, Display, Update, Delete functions for Product
+- Check all `forms.py` and form validation correspond to the underlying `models.py`
+- Ensure all entries and details from `db` are properly rendinging
 - Check navbar functionality and responsiveness
-- Check pagination is working for `show_all_fish` and `show_all_plants`
 
 ## 14.2 Deployment Steps to Github
 Deployment was done via github pages.
@@ -344,13 +354,10 @@ After ensuring that final commit and push via Visual Studio Code was done
 2. Check `remotes` using `git remote -v`
 3. Ensure that `requirements.txt` is updated correctly
 4. perform `git push heroku master`
-5. Setup environment variables in heroku as follows
-```
-heroku config:set MONGO_URI= XXX
-```
+5. Setup environment variables 
 6. Check that environment variables can be seen in heroku app settings under `config vars`
-5. Verify that site has been published to Heroku dashboard in Heroku ([Link](https://dashboard.heroku.com/apps/aquarist-resource))
-7. Click on [Published URL](https://aquarist-resource.herokuapp.com/)
+5. Verify that site has been published to Heroku dashboard in Heroku [Link](https://dashboard.heroku.com/apps/pampas-collective)
+7. Click on [Published URL](https://pampas-collective.herokuapp.com/)
 8. perform another round of validation based on `#14.1 Preparation` but this time in `heroku` instead of `gitpod browser preview`
 
 ## 14.3 Production

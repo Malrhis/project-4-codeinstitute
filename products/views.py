@@ -117,6 +117,9 @@ def delete_product(request, product_id):
     product_to_delete = get_object_or_404(Product, pk=product_id)
     if request.method == 'POST':
         product_to_delete.delete()
+        messages.success(
+                request,
+                f"Product has been deleted")
         return redirect(reverse(show_products))
     else:
         return render(request, 'products/delete-product.template.html', {
