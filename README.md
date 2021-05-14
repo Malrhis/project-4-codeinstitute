@@ -152,7 +152,7 @@ The final design aims to provide a solution to all user stories listed in `secti
 - We display whether the user is logged in or not using `{% if request.user.is_authenticated %}`
 
 ### 6.2.2 Product page
-<img height="400px" src="static/images/landing-page.png" >
+<img height="400px" src="static/images/product-page.png" >
 
 ```
 2. I want to be able to see how many of each item has left in stock
@@ -161,20 +161,21 @@ The final design aims to provide a solution to all user stories listed in `secti
 - `For Loop` was used to pull all the products from `product` model based on `product id`
 
 ### 6.2.3 Search Function
-<img height="400px" src="static/images/landing-page.png" >
+<img height="400px" src="static/images/product-page.png" >
 
 ```
 1. I want to be able to search and sort through the products
 ```
 - Search implemented using `from django.db.models import Q`
 - Created a query object `queries = ~Q(pk__in=[])` that is always `true`
-- Appended more queries to build search query
+- Appended more queries to build a more complex search query
 - Query paramaters passed via `GET` method to `show_products` function to perform filtering and rendering
 
 ### 6.2.4 Product Details Page
-<img height="400px" src="static/images/landing-page.png" >
+<img height="400px" src="static/images/product-details.png" >
 
 ```
+4. I want to be able to leave a review about the products on the website.
 ```
 - displays a particular product and the reviews for that product
 - product parameters were displayed using 
