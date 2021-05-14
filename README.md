@@ -2,7 +2,7 @@
 <img height="300px" src="static/images/pampas-collective-logo.jpeg">
 
 # 1. Background & Objective
-## Background / Problem Statement
+## 1.1 Background / Problem Statement
 - The store administrator/owner is currently selling via South East Asia's largest e-commerce platform [Link to Shopee.sg store](https://shopee.sg/melodyamanda7?categoryId=11&itemId=3760378194)
 - Need to have own store - similar to most other businesses based in singapore, to build credibility and online presence.
 
@@ -12,7 +12,7 @@ Sample of stores that other small businesses have
 * [Petitefleur](https://www.petitefleursg.com/)
 
 
-## Objective
+## 1.2 Objective
 * Design and build a store for Pampas Collective SG
 * Pampas Collective needs
     1. Mobile responsive store front-end with landing page
@@ -259,16 +259,8 @@ class= "navbar-dar"
 ```
 <br>
 
-# 7. Detailed Features Write-up
-## 7.1 Search Bar
-- how was each implemented?
-
-## 7.1.1 Search Bar Validation
-- simple if function to prevent empty string from being processed
-
-
-# 8. External Frameworks
-## 8.1 Boostrap 4 Implemetation
+# 7. External Frameworks
+## 7.1 Boostrap 4 Implemetation
 - Bootstrap 4 was used for re-building the website in a responsive, mobile-first manner. You can access Boostrap 4 resouces [here](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
 
 The below `code snippets` were added to the HTML in `base.template.html` to invoke the boostrap framework
@@ -286,7 +278,7 @@ The below `code snippets` were added to the HTML in `base.template.html` to invo
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 ```
 
-## 8.2 Toastr Implementation
+## 7.2 Toastr Implementation
 - Toastr was used instead of just flash messages displayed as a HTML div
 
 The below `code snippets` were added to the HTML in `base.template.html` to be able to use toastr
@@ -302,7 +294,7 @@ The below `code snippets` were added to the HTML in `base.template.html` to be a
 
 ```
 
-### 8.2.1 Toastr Messages implementation
+### 7.2.1 Toastr Messages implementation
 Reference was taken from [this stackoverflow page](https://stackoverflow.com/questions/45004245/how-to-use-toastr-in-django-for-success-or-fail-message) on how to implement toastr with django
 
 ```
@@ -352,9 +344,9 @@ toastr.options = {
 
 <br>
 
-# 9. Environment setup
+# 8. Environment setup
 
-## 9.1
+## 8.1
 - The following were used in the .env file during development. 
 - For Heroku, these are stored under Heroku settings > Config vars
 - These values were then passed to `settings.py` via `os.environ.get()`
@@ -381,7 +373,7 @@ TEST_EMAIL
 ```
 
 
-# 10. Content Credits
+# 9. Content Credits
 ## Hero Banner
 - Credits to magazinec.com https://magazinec.com/wp-content/uploads/2019/07/Hero-9.jpg 
 
@@ -390,19 +382,19 @@ TEST_EMAIL
 
 <br>
 
-# 12. Testing
-## 12.1 Code Validation using Code Validators
+# 10. Testing
+## 10.1 Code Validation using Code Validators
 - `static/style.css` was validated using the W3C Jigsaw validator ([Link](https://jigsaw.w3.org/css-validator/))
   - No issues were found with `style.css`
   
 - all `.html` files in `templates` was validated using the W3 Nu HTML Validator ([Link](https://validator.w3.org/nu/#file))
 
-## 12.2 PEP8 Style guide for Python
+## 10.2 PEP8 Style guide for Python
 All code in `.py` files comply with `PEP8` [Style guide](https://www.python.org/dev/peps/pep-0008/) 
 
 This is ensured by making sure no callouts from gitpod python linter are present in `app.py` and that no lines of code in `app.py` exceed 79 Characters
 
-## 12.2 Testing and Bug Fixes (Test Case Table)
+## 10.2 Testing and Bug Fixes (Test Case Table)
 Manual testing was conducted to ensure `Usability`, `Functionality` and `Responsiveness`
 
 | # |Type| Test       | Result           | Fix/Expected Result  |
@@ -429,15 +421,15 @@ Manual testing was conducted to ensure `Usability`, `Functionality` and `Respons
 
 <br>
 
-# 14. Deployment
+# 11. Deployment
 Deployment flow is entirely credited to our instructor in Singapore, Mr Paul Chor's instructions document at [this link](https://docs.google.com/document/d/1TYCxMEcnQKs8gs8IUBX2uXsFcZEqRP2BtNzGTuPM-rY/edit?usp=sharing)
 
-## 14.0 Things to check 
+## 11.0 Things to check 
 1. set `debug=False`!!! since we are going into production and no longer in development
 2. Ensure that `settings.py` allowed hosts do not have `*`
 3. Do not upload the `.env` file
 
-## 14.1 Preparation
+## 11.1 Preparation
 Before the site goes `live` the following elements are checked gitpod's native browser preview via open port `8000`. This is done by executing command in terminal `python3 manage.py runserver`
 - Fulfillment of Learning objectives from 'Code Insitutes' Assessment Handbook`
 - Check all code linters and validators are clear
@@ -448,14 +440,14 @@ Before the site goes `live` the following elements are checked gitpod's native b
 - Ensure all entries and details from `db` are properly rendinging
 - Check navbar functionality and responsiveness
 
-## 14.2 Deployment Steps to Github
+## 11.2 Deployment Steps to Github
 Deployment was done via github pages.
 
 After ensuring that final commit and push via Visual Studio Code was done
 
 1. Check if the contents have been successfully pushed to repository at https://github.com/Malrhis/project3
 
-## 14.3 Deployment to Heroku
+## 11.3 Deployment to Heroku
 1. Login to `heroku` on terminal using `heroku login -i`
 2. Check `remotes` using `git remote -v`
 3. Ensure that `requirements.txt` is updated correctly
@@ -466,13 +458,18 @@ After ensuring that final commit and push via Visual Studio Code was done
 7. Click on [Published URL](https://pampas-collective.herokuapp.com/)
 8. perform another round of validation based on `#14.1 Preparation` but this time in `heroku` instead of `gitpod browser preview`
 
-## 14.3 Production
+## 11.3 Production
 In the event that `#14.1`, `#14.2` & `#14.3`  are cleared, the site can then be considered to be in production. 
 If not, repeat to ensure that deploying of code is error free and is working in `Github repo` and `heroku`.
 
 <br>
 
-# 15. Acknowledgements
+# 12. Acknowledgements
+## 12.1 Acknowledgements and Credit for django tutor & coding labs tutorial used for reference
+As this code was written with the tutorship of Mr Paul Chor, who is the full stack tutor for CodeInstitute's partnership with Trent global college in Singapore,
+Much of the code was written in reference to his tutorial lab sheet for django [here](https://docs.google.com/document/d/1TYCxMEcnQKs8gs8IUBX2uXsFcZEqRP2BtNzGTuPM-rY/edit?usp=sharing)
+
+## 12.2 General Acknowledgements:
 - Mr Malcolm Yam - Bootrap instructor
 - Mr Arif Rawi - HTML and CSS instructor
 - Mr Paul Kunxin Chor - Who guided us on python, Jinja2, flask, mongo, pymongo
