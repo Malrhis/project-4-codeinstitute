@@ -183,7 +183,7 @@ The final design aims to provide a solution to all user stories listed in `secti
 
 
 ### 6.2.5 Reviews Creation
-<img height="400px" src="static/images/landing-page.png" >
+<img height="400px" src="static/images/create-review.png" >
 
 ```
 4. I want to be able to leave a review about the products on the website.
@@ -195,7 +195,7 @@ The final design aims to provide a solution to all user stories listed in `secti
 - building `views` and `template` for review update and delete can be a future improvement on top of this `MVP`
 
 ### 6.2.6 Product CRUD
-<img height="400px" src="static/images/landing-page.png" >
+<img height="400px" src="static/images/create-products.png" >
 
 ```
 1. I want to be able to list my products, so that users can see the pictures and the price of my items - perform standard CRUD for all my product listings
@@ -214,19 +214,42 @@ The final design aims to provide a solution to all user stories listed in `secti
 - additional logics are implemented using `if-else` customer logics in the `view function`
 
 ### 6.2.8 Cart
+<img height="400px" src="static/images/view-cart.png" >
 
 ```
 3. I want to be able to pay without hassle
 ```
 - Cart was implemented using django sessions
 - backend values were stored in sessions as `string` or `float` and displayed via `cart/templates` using the `view_cart` function.
+- Update functionality will extract sessions storage and update the array with requests from the update quantity form input
+- for simplicity, `add to cart` from `product` page will only add `1` item per click
+- User cannot update quantity to `zero`, user will have to remove item from the cart instead, to prevent downstream discrepeancies.
 
-### 6.2.9 Checkout
+### 6.2.9 Delivery form
+<img height="400px" src="static/images/delivery-form.png" >
 
 ```
 3. I want to be able to pay without hassle
 5. I want to be able to get delivery addresses for each successful purchase
 ```
+
+- Delivery form inserted before actual checkout
+- `foreign key` of `user id` is used to link the models, so that each delivery address submission can be associated with `one` user
+- After submission of form, users can proceed to checkout
+- The idea is that the latest delivery address submitted will be used for the `checkout success` purchase
+
+### 6.2.10 Checkout
+<img height="400px" src="static/images/stripe-checkout.png" >
+
+```
+3. I want to be able to pay without hassle
+```
+
+- Checkout is processed by `stripe`
+- After checkout success, will redirect to `STRIPE_SUCCESS_URL`
+- `metadata` is used to create `Purchases` model.
+- `Purchases` will let the store owner continue to process and fulfill the deliveries based on `Address` that was collected.
+
 
 ## 6.3 Colour
 Bootrap's dark theme was used
