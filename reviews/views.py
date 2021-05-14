@@ -8,7 +8,7 @@ from .models import Review
 from .forms import ReviewForm
 from products.models import Product
 from django.contrib.auth.decorators import login_required
-from products.views import show_products
+from products.views import show_products, view_product_details
 # Create your views here.
 
 
@@ -36,8 +36,10 @@ def create_reviews(request, product_id):
             review_created.owner = request.user
             review_created.save()
             messages.success(
-                request, f"New review {create_review_form.cleaned_data['title']} has been created")
-            return redirect(reverse(show_reviews))
+                request, f"New review has been created.")
+            return render(request, 'products/product-details.template.html', {
+                'product': product
+            })
     else:
         create_review_form = ReviewForm()
         return render(request, 'reviews/create-reviews.template.html', {
