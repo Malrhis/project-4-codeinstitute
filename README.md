@@ -86,6 +86,7 @@ For the buyers
 2. I want to be able to see how many of each item has left in stock
 3. I want to be able to pay without hassle
 4. I want to be able to leave a review about the products on the website.
+5. I want to be able to see what the site is about at first glance
 ```
 
 <br>
@@ -140,11 +141,90 @@ The final design aims to provide a solution to all user stories listed in `secti
 <img height="400px" src="static/images/actuals-group-1.png"/>
 
 
-### 6.2.1 Search Section
-<img style="height:300px" src="" >
+### 6.2.1 Landing Page & Navbar
+<img height="400px" src="static/images/landing-page.png" >
 
 ```
-1. Insert which user story was fulfilled by this feature
+5. I want to be able to see what the site is about at first glance
+```
+- Implemented in `products/templates` using `Django Templates`. No key back-end parameters needed to be passed to this page.
+- For Nav bar, [bootstrap 4 nav-bar was used](https://getbootstrap.com/docs/4.0/components/navbar/) 
+- We display whether the user is logged in or not using `{% if request.user.is_authenticated %}`
+
+### 6.2.2 Product page
+<img height="400px" src="static/images/landing-page.png" >
+
+```
+2. I want to be able to see how many of each item has left in stock
+```
+- `Django template` was used to list all products from the database
+- `For Loop` was used to pull all the products from `product` model based on `product id`
+
+### 6.2.3 Search Function
+<img height="400px" src="static/images/landing-page.png" >
+
+```
+1. I want to be able to search and sort through the products
+```
+- Search implemented using `from django.db.models import Q`
+- Created a query object `queries = ~Q(pk__in=[])` that is always `true`
+- Appended more queries to build search query
+- Query paramaters passed via `GET` method to `show_products` function to perform filtering and rendering
+
+### 6.2.4 Product Details Page
+<img height="400px" src="static/images/landing-page.png" >
+
+```
+```
+- displays a particular product and the reviews for that product
+- product parameters were displayed using 
+- reviews were gotten using `For Loop` to look for reviews with the related `product id`
+
+
+### 6.2.5 Reviews Creation
+<img height="400px" src="static/images/landing-page.png" >
+
+```
+4. I want to be able to leave a review about the products on the website.
+```
+- implemented using `forms.py` to display `review` `model` fields
+- afer form is submitted with `GET` method, will be redirected back to the product details page. 
+- No update or delete route is needed for user stories right now, since buyers generally don't get to change their reviews. 
+- `Admin` can still remove the reviews directly from `django-admin` if they so choose
+- building `views` and `template` for review update and delete can be a future improvement on top of this `MVP`
+
+### 6.2.6 Product CRUD
+<img height="400px" src="static/images/landing-page.png" >
+
+```
+1. I want to be able to list my products, so that users can see the pictures and the price of my items - perform standard CRUD for all my product listings
+```
+- full suite of CRUD functions implemented using `products/views.py` view functions.
+- one function is used for each operation
+- Product CRUD is only usable by `admin` who is the Seller
+- any other user will meet with an `access denied` message
+
+### 6.2.7 Access Controls
+
+```
+7. I want to use my store for inventory management, so that I don't let buyers buy what I don't have in my inventory
+```
+- Access controls are implemented using `django all auth decorator` for `@login` 
+- additional logics are implemented using `if-else` customer logics in the `view function`
+
+### 6.2.8 Cart
+
+```
+3. I want to be able to pay without hassle
+```
+- Cart was implemented using django sessions
+- backend values were stored in sessions as `string` or `float` and displayed via `cart/templates` using the `view_cart` function.
+
+### 6.2.9 Checkout
+
+```
+3. I want to be able to pay without hassle
+5. I want to be able to get delivery addresses for each successful purchase
 ```
 
 ## 6.3 Colour
