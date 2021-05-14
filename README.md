@@ -205,6 +205,16 @@ The final design aims to provide a solution to all user stories listed in `secti
 - Product CRUD is only usable by `admin` who is the Seller
 - any other user will meet with an `access denied` message
 
+#### 6.2.6.1 Image uploading using UploadCare
+- Uploadcare [link](https://uploadcare.com/) is used to handle uploading of images for `product create`.  
+- the image cdn url is stored and rendered in the `img` `src` of each `product` `card`
+- install uploadcare with `pip3 install pyuploadcare`
+
+### 6.2.6.2 Speed issues with UploadCare
+Each image uploaded by the seller can be a hi-res image taken on her phone ~5MB. Uploadcare as a cdn service might not be able to return these images fast enough, especially on the `free tier`
+
+For the purposes of this `MVP`, we will make do with any latency issues in getting the image display for every single card in `show products` route.
+
 ### 6.2.7 Access Controls
 
 ```
@@ -249,6 +259,9 @@ The final design aims to provide a solution to all user stories listed in `secti
 - After checkout success, will redirect to `STRIPE_SUCCESS_URL`
 - `metadata` is used to create `Purchases` model.
 - `Purchases` will let the store owner continue to process and fulfill the deliveries based on `Address` that was collected.
+
+#### 6.2.10.1 Stripe implementation
+Stripe implementation documents can be accessed [here](https://stripe.com/docs/api/invoices) at stripe API docs
 
 
 ## 6.3 Colour
@@ -417,6 +430,7 @@ Manual testing was conducted to ensure `Usability`, `Functionality` and `Respons
 |17 | Functionality | `Purchases` should be stored in `Purchases Model` after Checkout is successful | Failed to store in Purchases | Did not migrate after creating Purchases model. Subsequent attempts all OK | 
 |18 | Usability | Instances of `product.name` being rendered on front end template should be linked to `product-details.template.html | Links are working propery | All OK |
 |19 | Usability, Functionality | Sending of email OTP for sign-ups & passwords | Email received | All OK|
+|20 | Usability | Images display properly for all created products | Images display, but due to high number of products, the images load slowly. CDN infrastructure side issue due to `free tier` server | Acceptable for MVP. All OK |
 
 
 <br>
