@@ -416,8 +416,7 @@ Manual testing was conducted to ensure `Usability`, `Functionality` and `Respons
 |16 | Functionality |  `Checkout Cancelled` should redirect to `Checkout Cancelled` page after receiving call back from `Stripe`. |Redirect went to correct template | All OK| 
 |17 | Functionality | `Purchases` should be stored in `Purchases Model` after Checkout is successful | Failed to store in Purchases | Did not migrate after creating Purchases model. Subsequent attempts all OK | 
 |18 | Usability | Instances of `product.name` being rendered on front end template should be linked to `product-details.template.html | Links are working propery | All OK |
-|19 | Usability, Functionality | Sending of email OTP for sign-ups & passwords | 
-
+|19 | Usability, Functionality | Sending of email OTP for sign-ups & passwords | Email received | All OK|
 
 
 <br>
