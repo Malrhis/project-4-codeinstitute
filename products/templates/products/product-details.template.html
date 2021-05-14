@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-md-6">
             <div>
-                <img class="card-img-top img-fluid border border-dark" src="{{product.image.cdn_url}}" />
+                <img class="card-img-top img-fluid border border-dark" src="{{product.image.cdn_url}}" alt="product-image" />
             </div>
         </div>
         <div class="col-md-6">
@@ -43,8 +43,8 @@
     <div class="my-3">
         <div class="row px-3 py-0 pb-md-4 ">
             <div class="col d-flex justify-content-between">
-                <h4 class="d-inline-block my-auto">Reviews for {{ product.name }}</h4>
-                <a href="{% url 'create_review_route' product_id=product.id %}" class="btn btn-sm btn-dark">Add a
+                <h4 class="d-inline-block mb-2 mr-1">Reviews for {{ product.name }}</h4>
+                <a href="{% url 'create_review_route' product_id=product.id %}" class="btn btn-sm btn-dark mb-2">Add a
                     Review</a>
             </div>
         </div>
