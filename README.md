@@ -115,7 +115,7 @@ ER diagram was first used to have a high level view of all entities that might b
 ## 6.1 Logical Schema Diagram
 <img height="700px" src="static/images/logical-schema.png">
 
-Logical schema was developed to have the following tables:
+Logical schema was developed to have the following tables (`models`):
 1. Products
 2. Reviews of each product
 3. User - from `django` as a default
@@ -136,6 +136,8 @@ Online Web store Reference was taken from
 
 ## 6.2 Actual Final Design
 The final design aims to provide a solution to all user stories listed in `section 4 The Goals: User Stories or (JTBD) Jobs-to-be-Done` 
+
+<img height="400px" src="static/images/actuals-group-1.png"/>
 
 
 ### 6.2.1 Search Section
